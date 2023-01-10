@@ -1,0 +1,24 @@
+:root{
+    --bg-: #f5f5f5;
+}
+
+/* Home hero */
+@media only screen and (min-width: 1024px) {
+    .header-content {
+      margin-left: 10rem;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .header-content {
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .aboutus{
+        padding: 1.25rem;
+    }
+  }
+
+
