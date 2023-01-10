@@ -37,11 +37,12 @@ class PizzaController extends Controller
      */
     public function store(StorePizzaRequest $request)
     {
-             //gets pizza by id which is selected from the dropdown
-             $pizza = Pizza ::find($request->get('id'));
+        //  ---- THIS MIGHT BE NEEDED FOR ORDER NOT PIZZA
+            //  //gets pizza by id which is selected from the dropdown
+            //  $input = Pizza ::find($request->get('id'));
             
-             $input->save();
-             return redirect('#s')->with('success', 'Pizza added to your order.');   
+            //  $input->save();
+            //  return redirect('#s')->with('success', 'Pizza added to your order.');   
     }
 
     /**

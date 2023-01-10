@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pizza extends Model
+class Order extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function orders()
+    public function pizzas()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->hasMany(Pizza::class);
     }
 }
