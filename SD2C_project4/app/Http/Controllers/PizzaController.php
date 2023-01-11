@@ -1,11 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76b978a5a74f8f2b7b7614d49235a23fa9ccc2fc
 use App\Models\Pizza;
 use App\Models\Order;
 use App\Http\Requests\StorePizzaRequest;
 use App\Http\Requests\UpdatePizzaRequest;
+<<<<<<< HEAD
 use Illuminate\Http\Request;
+=======
+
+>>>>>>> 76b978a5a74f8f2b7b7614d49235a23fa9ccc2fc
 
 class PizzaController extends Controller
 {
@@ -17,6 +25,10 @@ class PizzaController extends Controller
     public function index()
     {
         $pizzas = Pizza::all();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76b978a5a74f8f2b7b7614d49235a23fa9ccc2fc
         return view('pizza.menu', ['pizzas' => $pizzas]);
 
     }
@@ -28,6 +40,10 @@ class PizzaController extends Controller
      */
     public function create($request)
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76b978a5a74f8f2b7b7614d49235a23fa9ccc2fc
             $validatedData = $request->validate([
                 'pizza_id' => 'required|exists:pizzas,id',
                 'size' => 'required',
@@ -52,6 +68,10 @@ class PizzaController extends Controller
 
             // Send the order details to the view
             return view('order.confirmation')->with('order', $order);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76b978a5a74f8f2b7b7614d49235a23fa9ccc2fc
     }
 
 
