@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
     @vite('resources/css/app.css')
     <title>Stonks Pizza</title>
 </head>
+
 <body>
-    <header>
-        @yield('nav')
-    </header>
-        @yield('content')
+    <div class="d-flex flex-column min-vh-100">
+        <div>
+            <!-- Your header content here -->
+            <header>
+                @include('layouts.nav')
+            </header>
+        </div>
+        <main class="flex-grow-1">
+            @yield('content')
+        </main>
+        @include('layouts.footer')
+    </div>
 </body>
+
 </html>
