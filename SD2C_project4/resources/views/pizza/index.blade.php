@@ -1,7 +1,7 @@
 @extends('layouts.app-layout')
 @section('content')
     <div id="home" class="relative z-10 header-hero">
-        <div class="container">
+        <div class="container z-20" id="hero">
             <div class="justify-center row">
                 <div class="w-full lg:w-5/6 xl:w-2/3">
                     <div class="pt-48 pb-64 header-content">
@@ -28,9 +28,9 @@
             </div> <!-- row -->
         </div> <!-- container -->
     </div> <!-- header content -->
-    <div class="container mx-auto py-8 bg-black ">
-        <div class="flex flex-wrap">
-            <div class="w-full md:w-1/2 aboutus">
+    <div class="py-8 main-content">
+        <div class="flex flex-wrap mx-10">
+            <div class="w-full md:w-1/2">
                 <h1 class="text-4xl font-semibold mb-5">About Us</h1>
                 <p class="text-gray-700 text-justify text-lg">Stonks Pizza is een lokale pizzatent die gevestigd is in de stad en gekend is voor de heerlijke smaken en de verse ingrediënten die we gebruiken. Wij geloven in het maken van authentieke pizza's die in onze houtgestookte oven gebakken worden.
                     Ons doel is om onze klanten de meest smakelijke pizza's aan te bieden die we kunnen maken. Wij zijn trots op ons team van professionele koks die ervaring hebben in de pizza-industrie en geobsedeerd zijn met het creëren van de perfecte pizza. Onze pizza's zijn gemaakt met de beste ingrediënten en altijd vers.
