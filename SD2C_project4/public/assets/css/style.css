@@ -30,3 +30,15 @@ nav{
     background-color: var(--bg-);
 }
 
+/* Pizza menu */
+.pizza_menu{
+    height: auto;
+    width: 300px;
+}
+
+.pizza_menu img{
+    max-width: 150%;
+    height: 200px;
+    width: 250px;
+    object-fit: cover;
+}
