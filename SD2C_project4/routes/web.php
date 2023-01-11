@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/home', [PizzaController::class, 'index']);
+Route::get('/menu', [PizzaController::class, 'index']);
+Route::get('/home', function() {
+    return view('pizza.index');
+});
 
 Route::resource('pizza', PizzaController::class);
