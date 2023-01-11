@@ -10,12 +10,19 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/logo.png')}}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+ 
+    <script type="text/javascript" src="./assets/js/pizzaOrder.js"></script>
+
+ 
+        
 
     @vite('resources/css/app.css')
     <title>Stonks Pizza</title>
+
 </head>
 
 <body>
+
     <div class="d-flex flex-column min-vh-100">
         <div>
             <!-- Your header content here -->
