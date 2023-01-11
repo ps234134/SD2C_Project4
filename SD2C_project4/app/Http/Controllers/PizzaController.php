@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Pizza;
 use App\Models\Order;
 use App\Http\Requests\StorePizzaRequest;
 use App\Http\Requests\UpdatePizzaRequest;
-use Illuminate\Http\Request;
+
 
 class PizzaController extends Controller
 {
@@ -17,6 +18,7 @@ class PizzaController extends Controller
     public function index()
     {
         $pizzas = Pizza::all();
+
         return view('pizza.menu', ['pizzas' => $pizzas]);
 
     }
@@ -28,6 +30,7 @@ class PizzaController extends Controller
      */
     public function create($request)
     {
+
             $validatedData = $request->validate([
                 'pizza_id' => 'required|exists:pizzas,id',
                 'size' => 'required',
@@ -52,6 +55,7 @@ class PizzaController extends Controller
 
             // Send the order details to the view
             return view('order.confirmation')->with('order', $order);
+
     }
 
 
