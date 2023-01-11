@@ -42,3 +42,10 @@ nav{
     width: 250px;
     object-fit: cover;
 }
+
+/* Bestellingen content */
+
+.bestellingen-card{
+    height: auto;
+    width: 400px;
+}

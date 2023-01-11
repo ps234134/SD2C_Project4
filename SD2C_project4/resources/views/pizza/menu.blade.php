@@ -31,13 +31,16 @@
                 @endforeach
             </div>
         </div>
-        <div class="container flex flex-wrap justify-center py-16 w-full">
-            <div class="first-letter:">
-                <div class="col-4">
-                    <h2>Order</h2>
-
+        <div class="container flex flex-wrap justify-center py-16" style="position: relative">
+            <div class="bestellingen-card rounded-lg shadow-md bg-gray-100">
+                <div class="p-4 flex-col items-end" style="position: sticky; top: 0;">
+                    <h2 class="text-lg font-medium">Bestellingen</h2>
+                    <div class="mt-2">
+                        <p>Total: <span id="total"></span></p>
+                    </div>
+                    <div class="mt-4">
+                        <button class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none">Plaats bestelling</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-@endsection
+    @endsection
