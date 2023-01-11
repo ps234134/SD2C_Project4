@@ -24,9 +24,50 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($request)
     {
-        //
+        $validatedData = $request->validate([
+            'id' => 'required|exists:pizzas,id',
+            'base_price' => 'required|exists:pizzas,base_price',
+            'size' => 'required',
+                         
+            ]);
+    
+            // Calculate Order Price
+            $pizza = Pizza::find($validatedData['id']);
+            $base_price = $validatedData['base_price'];
+            $size = $validatedData['size'];
+
+
+            switch($size){
+                case('small'):
+                    $size_price = $base_price*0.8;
+
+                break;
+
+                case('medium'):
+                    $size_price = $base_price*1;
+                break;
+
+                case('large'):
+                    $size_price = $base_price*1.2;
+                break;
+
+                default:
+                return view('#')->with('size', $size)->with('fail', 'something went wrong with choosing a size');
+            }
+
+            // Create a new order
+            $order = new Order();
+            $order->pizza_id = $validatedData['pizza_id'];
+            $order->size = $validatedData['size'];
+           
+            $order->total_price += $size_price;
+            $order->save();
+    
+            // Send the order details to the view
+            return view('#')->with('order', $order);
+            
     }
 
     /**
@@ -92,4 +133,5 @@ class OrderController extends Controller
         return redirect('#')
             ->with('success', 'order deleted successfully');
     }
+
 }

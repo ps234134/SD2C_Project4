@@ -24,9 +24,35 @@ class PizzaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($request)
     {
-        // 
+        {
+            $validatedData = $request->validate([
+                'pizza_id' => 'required|exists:pizzas,id',
+                'size' => 'required',
+                
+            ]);
+    
+            // Calculate Order Price
+            $pizza = Pizza::find($validatedData['pizza_id']);
+            $base_price = $pizza->base_price;
+
+            $size_price = $pizza->sizes->where('name', $validatedData['size'])->first()->price;
+           
+            $total_price = $base_price + $size_price;
+    
+            // Create a new order
+            $order = new Order();
+            $order->pizza_id = $validatedData['pizza_id'];
+            $order->size = $validatedData['size'];
+            $order->toppings = isset($validatedData['toppings']) ? json_encode($validatedData['toppings']) : null;
+            $order->total_price = $total_price;
+            $order->save();
+    
+            // Send the order details to the view
+            return view('order.confirmation')->with('order', $order);
+        }
+    
     }
 
     /**
@@ -37,12 +63,7 @@ class PizzaController extends Controller
      */
     public function store(StorePizzaRequest $request)
     {
-        //  ---- THIS MIGHT BE NEEDED FOR ORDER NOT PIZZA
-            //  //gets pizza by id which is selected from the dropdown
-            //  $input = Pizza ::find($request->get('id'));
-            
-            //  $input->save();
-            //  return redirect('#s')->with('success', 'Pizza added to your order.');   
+         
     }
 
     /**

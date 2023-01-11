@@ -17,26 +17,22 @@ class PizzaSeeder extends Seeder
     {
         DB::table('pizzas')->insert([
             'pizza_name' => 'Pizza Funghi',
-            'price_small' => '1.00',
-            'price_medium' => '1.80',
-            'price_large' => '2.20',
+            'base_price' => '13.00',
+           
          
         ]);
 
         DB::table('pizzas')->insert([
             'pizza_name' => 'Pizza Hawaii',
-            'price_small' => '1.50',
-            'price_medium' => '2.60',
-            'price_large' => '3.20',
+            'base_price' => '16.00',
          
         ]);
 
 
         DB::table('pizzas')->insert([
             'pizza_name' => 'Pizza Salami',
-            'price_small' => '1.20',
-            'price_medium' => '1.90',
-            'price_large' => '2.70',
+            'base_price' => '11.00',
+            
          
         ]);
 

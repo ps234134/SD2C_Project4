@@ -16,9 +16,7 @@ return new class extends Migration
         Schema::create('pizzas', function (Blueprint $table) {
             $table->id();
             $table->string('pizza_name');
-            $table->decimal('price_small');
-            $table->decimal('price_medium');
-            $table->decimal('price_large');
+            $table->decimal('base_price');
             $table->timestamps();
         });
     }
