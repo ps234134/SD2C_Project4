@@ -31,12 +31,12 @@ nav{
 }
 
 /* Pizza menu */
-.pizza_menu{
+.pizza-card{
     height: auto;
     width: 300px;
 }
 
-.pizza_menu img{
+.pizza-card img{
     max-width: 150%;
     height: 200px;
     width: 250px;
@@ -45,7 +45,48 @@ nav{
 
 /* Bestellingen content */
 
+
 .bestellingen-card{
     height: auto;
     width: 400px;
 }
+.bottom-sticky{
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .bestellingen-container {
+      display: none;
+    }
+    .shopping-cart-icon {
+        cursor: pointer;
+      }
+
+      .bottom-sticky {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 99;
+    }
+  }
+
+  /* .orders-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: red;
+} */
