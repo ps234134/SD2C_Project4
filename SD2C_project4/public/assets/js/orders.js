@@ -8,3 +8,5 @@ function showOrders(){
 }
 document.querySelector('.shopping-cart-icon').addEventListener('click', showOrders);
 document.querySelector('.backdrop').addEventListener('click', showOrders);
+
+
