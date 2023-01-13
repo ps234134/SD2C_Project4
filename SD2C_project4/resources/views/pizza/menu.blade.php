@@ -42,7 +42,6 @@
                 </div>
             </div>
         </div>
-
         <div class="bestellingen-container" >
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
