@@ -10,7 +10,7 @@
                     <script>let basePrices = {};</script>
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
-                            <h2 class="font-medium">{{ $pizza->pizza_name }}</h2>
+                            <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
                             <p class="text-m" id="price-{{ $pizza->id }}">€{{ $pizza->base_price }}</p>
                         </div>
                         <label class="block text-sm font-medium text-gray-700 mb-2" for="size">Size:</label>
@@ -37,9 +37,11 @@
         </div>
         <div class="bottom-sticky">
             <div class="shopping-cart-icon" id="shopping-cart" onclick="showOrders()" style="position: relative">
+                <span class="cart-quantity font-bold" id="cart-quantity">0</span>
                 <div>
                     <i class="bx bx-cart bx-lg" style="position: sticky; top: 0; color:red;"></i>
                 </div>
+
             </div>
         </div>
 

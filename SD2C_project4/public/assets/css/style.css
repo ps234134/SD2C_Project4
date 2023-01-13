@@ -62,6 +62,12 @@ nav{
     display: none;
 }
 
+.cart-quantity{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
 @media (max-width: 1024px) {
     .shopping-cart-icon {
         cursor: pointer;
