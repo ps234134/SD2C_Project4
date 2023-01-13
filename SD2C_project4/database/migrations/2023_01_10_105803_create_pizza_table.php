@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('pizza_name');
             $table->decimal('base_price');
+            $table->string('img');
             $table->timestamps();
         });
     }
