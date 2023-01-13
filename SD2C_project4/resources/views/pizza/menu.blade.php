@@ -30,11 +30,6 @@
                 </div>
             @endforeach
         </div>
-        {{-- <div class="shopping-cart-icon" id="shopping-cart" style="position: relative">
-            <div>
-                <i class="bx bx-cart bx-lg" style="position: sticky; top: 0;"></i>
-            </div>
-        </div> --}}
         <div class="bottom-sticky">
             <div class="shopping-cart-icon" id="shopping-cart" onclick="showOrders()" style="position: relative">
                 <div>
