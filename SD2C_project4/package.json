@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "boxicons": "^2.1.4",
         "particlesjs": "^2.2.3"
     }
 }
