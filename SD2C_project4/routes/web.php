@@ -33,5 +33,8 @@ Route::get('/menu', [PizzaController::class, 'index']);
 Route::get('/home', function() {
     return view('pizza.index');
 });
+Route::get('/contact', function() {
+    return view('pizza.contact');
+});
 
 Route::resource('pizza', PizzaController::class);

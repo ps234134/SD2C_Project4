@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/logo.png')}}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="text/javascript" src="./assets/js/orders.js"></script>
 
     @vite('resources/css/app.css')
     <title>Stonks Pizza</title>
