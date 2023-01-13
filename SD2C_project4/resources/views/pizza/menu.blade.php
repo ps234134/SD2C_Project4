@@ -1,14 +1,17 @@
 @extends('layouts.app-layout')
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-items-center py-8">
-        <div class="pizzas-container grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div class="pizzas-container grid grid-cols-1 md:grid-cols-2 gap-20">
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
                     <div class="relative flex justify-center">
                         <img src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
                     <div class="px-2 py-4">
-                        <h2 class="font-medium">{{ $pizza->pizza_name }}</h2>
+                        <div class="flex justify-between text-justify">
+                            <h2 class="font-medium">{{ $pizza->pizza_name }}</h2>
+                            <p class="text-m">€{{ $pizza->base_price}}</p>
+                        </div>
                         <label class="block text-sm font-medium text-gray-700 mb-2" for="size">Size:</label>
                         <select
                             class="block w-full py-2 px-3 border rounded-md bg-white text-gray-700 focus:outline-none focus:border-indigo-300">
@@ -39,7 +42,8 @@
                 </div>
             </div>
         </div>
-        <div class="bestellingen-container" style="position: relative">
+
+        <div class="bestellingen-container" >
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
                 <div class="orders-list p-4 flex-col items-start" style="height: calc(100vh - 200px);">
@@ -58,12 +62,12 @@
                     <div class="mt-4 flex justify-center">
                         <button
                             class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                            style="width: 300px">Plaats
+                            style="width: 300px" onclick="showOrders()">Plaats
                             bestelling</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div class="backdrop"></div>
     </div>
 @endsection
