@@ -5,54 +5,52 @@
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
                     <div class="relative flex justify-center">
-                        <img src="{{ asset($pizza->img) }}" alt="Pizza">
+                        <img id="pizza-img-{{$pizza->id}}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
+                    <script>let basePrices = {};</script>
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
-                            <h2 class="font-medium">{{ $pizza->pizza_name }}</h2>
-                            <p class="text-m">€{{ $pizza->base_price}}</p>
+                            <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
+                            <p class="text-m" id="price-{{ $pizza->id }}">€{{ $pizza->base_price }}</p>
                         </div>
                         <label class="block text-sm font-medium text-gray-700 mb-2" for="size">Size:</label>
                         <select
-                            class="block w-full py-2 px-3 border rounded-md bg-white text-gray-700 focus:outline-none focus:border-indigo-300">
-                            <option>Small</option>
-                            <option>Medium</option>
-                            <option>Large</option>
+                            class="block w-full py-2 px-3 border rounded-md bg-white text-gray-700 focus:outline-none focus:border-indigo-300"
+                            onchange="updatePrice({{ $pizza->id }}, this.value)" id="size-{{ $pizza->id }}">
+                            <option value="1">Medium</option>
+                            <option value="0.8">Small</option>
+                            <option value="1.2">Large</option>
                         </select>
                         <div class="mt-4">
                             <button
-                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none "onclick="addToOrder({{ $pizza->id }})">
-                                Place Order
+                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"onclick="addToOrder({{ $pizza->id }})">
+                                Toevoegen
                             </button>
                         </div>
-
+                        <script>
+                            // Store the base price of the pizza in the basePrices object when the page loads
+                            basePrices[{{ $pizza->id }}] = {{ $pizza->base_price }};
+                        </script>
                     </div>
                 </div>
             @endforeach
         </div>
-        {{-- <div class="shopping-cart-icon" id="shopping-cart" style="position: relative">
-            <div>
-                <i class="bx bx-cart bx-lg" style="position: sticky; top: 0;"></i>
-            </div>
-        </div> --}}
         <div class="bottom-sticky">
             <div class="shopping-cart-icon" id="shopping-cart" onclick="showOrders()" style="position: relative">
+                <span class="cart-quantity font-bold" id="cart-quantity">0</span>
                 <div>
                     <i class="bx bx-cart bx-lg" style="position: sticky; top: 0; color:red;"></i>
                 </div>
+
             </div>
         </div>
-        <div class="bestellingen-container" >
+
+        <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <div class="orders-list p-4 flex-col items-start" style="height: calc(100vh - 200px);">
+                <div class="orders-list p-4 flex-col items-start " style="height: calc(100vh - 200px);">
                     <!-- Orders will be displayed here -->
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sed in, quaerat magnam harum nihil?
-                    Laudantium, sunt. Laudantium possimus ipsum sint saepe aspernatur inventore iure dignissimos enim,
-                    consequatur a? Nesciunt!
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, dolorem minima magni hic a
-                    facere cumimpedit, modi laudantium ullam quos. Ut placeat fugiat eum quos libero neque cupiditate
-                    architecto.
+
                 </div>
                 <div class="p-4 flex-col bg-white">
                     <div class="my-2 font-medium">
