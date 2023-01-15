@@ -51,6 +51,7 @@ nav{
 .bestellingen-container.show{
     display: block;
 }
+
 .backdrop.show{
     display: block;
 }
@@ -68,6 +69,12 @@ nav{
     right: -5px;
 }
 
+.order-box img{
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 15px 50px;
+}
 @media (max-width: 1024px) {
     .shopping-cart-icon {
         cursor: pointer;

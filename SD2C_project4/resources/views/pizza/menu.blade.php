@@ -5,7 +5,7 @@
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
                     <div class="relative flex justify-center">
-                        <img src="{{ asset($pizza->img) }}" alt="Pizza">
+                        <img id="pizza-img-{{$pizza->id}}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
                     <script>let basePrices = {};</script>
                     <div class="px-2 py-4">
@@ -17,8 +17,8 @@
                         <select
                             class="block w-full py-2 px-3 border rounded-md bg-white text-gray-700 focus:outline-none focus:border-indigo-300"
                             onchange="updatePrice({{ $pizza->id }}, this.value)" id="size-{{ $pizza->id }}">
-                            <option value="0.8">Small</option>
                             <option value="1">Medium</option>
+                            <option value="0.8">Small</option>
                             <option value="1.2">Large</option>
                         </select>
                         <div class="mt-4">
@@ -48,7 +48,7 @@
         <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <div class="orders-list p-4 flex-col items-start" style="height: calc(100vh - 200px);">
+                <div class="orders-list p-4 flex-col items-start " style="height: calc(100vh - 200px);">
                     <!-- Orders will be displayed here -->
 
                 </div>
