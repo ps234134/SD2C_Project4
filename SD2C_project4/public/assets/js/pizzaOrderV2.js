@@ -1,3 +1,11 @@
+//secures total price
+function hashData() {
+    let hashedTotalServer = CryptoJS.SHA256(total);
+    let hashedTotalClient = document.getElementById("total");
+}
+
+
+
 function updatePrice(pizzaId, sizeMultiplier) {
     let basePrice = basePrices[pizzaId];
     let updatedPrice = basePrice * sizeMultiplier;
@@ -5,6 +13,7 @@ function updatePrice(pizzaId, sizeMultiplier) {
     priceElement.innerHTML = "€" + updatedPrice.toFixed(2);
     priceElement.setAttribute("data-price", updatedPrice);
 }
+
 function calculateTotal() {
     let orderList = document.getElementsByClassName("orders-list")[0];
     let orderItems = orderList.getElementsByClassName("order-item");
@@ -37,28 +46,28 @@ function addToOrder(pizzaId) {
     pizzaDiv.classList.add("order-item");
     // Add the pizza name, size, and price as text to the div
     pizzaDiv.innerHTML =
-        '<div class="order-box flex justify-between ">' +
-            '<div class="w-1/3">' +
-                '<h2 class="font-medium">' +
-                    pizzaName +
-                "</h2>" +
-                '<p class="text-m">' +
-                    sizeString +
-                "</p>" +
-            "</div>" +
-            '<div class="w-2/3">' +
-                '<img src="' +image +'" alt="Pizza">' +
-            "</div>" +
+        '<div class="order-box flex justify-between py-4">' +
+        '<div class="w-1/3">' +
+        '<h2 class="font-medium">' +
+        pizzaName +
+        "</h2>" +
+        '<p class="text-m">' +
+        sizeString +
+        "</p>" +
+        "</div>" +
+        '<div class="w-2/3">' +
+        '<img src="' + image + '" alt="Pizza">' +
+        "</div>" +
         "</div>" +
         '<div class="flex justify-between border-b-2 py-4">' +
-            '<div class="flex bg-white p-2 rounded-md shadow-md">' +
-                '<button onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
-                '<span class="order-quantity font-semibold px-6">1</span>' +
-                '<button onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
-            "</div>" +
-            '<p class="order-price font-semibold">' +
-            price +
-            "</p>" +
+        '<div class="flex bg-white p-2 rounded-md shadow-md">' +
+        '<button onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
+        '<span class="order-quantity font-semibold px-6">1</span>' +
+        '<button onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
+        "</div>" +
+        '<p class="order-price font-semibold">' +
+        price +
+        "</p>" +
         "</div>";
     // Append the div to the orders-list element
     document.querySelector(".orders-list").appendChild(pizzaDiv);
@@ -66,6 +75,16 @@ function addToOrder(pizzaId) {
     calculateTotal();
     //Add the quantity of the order to the cart
     updateCartQuantity(1);
+
+    let pizza_name = document.querySelector("#pizza_name").value;
+    let price2 = document.querySelector("#price").value;
+    let size = document.querySelector("#size").value;
+    let total_price = document.querySelector("#total").value;
+
+    document.querySelector("input[name='pizza_name']").value = pizza_name;
+    document.querySelector("input[name='price']").value = price2;
+    document.querySelector("input[name='size']").value = size;
+    document.querySelector("input[name='total_price']").value = total_price;
 }
 
 // Function to update the quantity of items in the cart

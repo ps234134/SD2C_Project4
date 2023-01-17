@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pizza_id');
             $table->string('size');
+            $table->integer('quantity');
             $table->decimal('total_price');
             $table->string('status');
             $table->timestamps();
