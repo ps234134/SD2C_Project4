@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
+use GuzzleHttp\Psr7\Request;
 
 class OrderController extends Controller
 {
@@ -105,6 +106,20 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //not needed
+    }
+
+    public function status(Request $request) {
+        $pizza_name = $request->input('pizza_name');
+        $price = $request->input('price');
+        $size = $request->input('size');
+        $total_price = $request->input('total_price');
+
+        //store in session or pass to view
+        session(['pizza_name' => $pizza_name]);
+        session(['price' => $price]);
+        session(['size' => $size]);
+        session(['total_price' => $total_price]);
+        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
     }
 
     /**

@@ -66,6 +66,16 @@ function addToOrder(pizzaId) {
     calculateTotal();
     //Add the quantity of the order to the cart
     updateCartQuantity(1);
+
+    let pizza_name = document.querySelector("#pizza_name").value;
+    let price2 = document.querySelector("#price").value;
+    let size = document.querySelector("#size").value;
+    let total_price = document.querySelector("#total").value;
+
+    document.querySelector("input[name='pizza_name']").value = pizza_name;
+    document.querySelector("input[name='price']").value = price2;
+    document.querySelector("input[name='size']").value = size;
+    document.querySelector("input[name='total_price']").value = total_price;
 }
 
 // Function to update the quantity of items in the cart

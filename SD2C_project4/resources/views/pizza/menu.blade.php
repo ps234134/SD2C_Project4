@@ -5,9 +5,11 @@
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
                     <div class="relative flex justify-center">
-                        <img id="pizza-img-{{$pizza->id}}" src="{{ asset($pizza->img) }}" alt="Pizza">
+                        <img id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
-                    <script>let basePrices = {};</script>
+                    <script>
+                        let basePrices = {};
+                    </script>
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
@@ -47,21 +49,27 @@
         <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
-                    <!-- Orders will be displayed here -->
-
-                </div>
-                <div class="p-4 flex-col bg-white">
-                    <div class="my-2 font-medium">
-                        <p>Totaal <span id="total"></span></p>
+                <form method="GET" action="{{'/status'}}" >
+                    @csrf
+                    <input type="hidden" name="pizza_name" value="{{ $pizza->pizza_name }}">
+                    <input type="hidden" name="price">
+                    <input type="hidden" name="size">
+                    <input type="hidden" name="total">
+                    <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
+                        <!-- Orders will be displayed here -->
                     </div>
-                    <div class="mt-4 flex justify-center">
-                        <button
-                            class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                            style="width: 300px">Plaats
-                            bestelling</button>
+                    <div class="p-4 flex-col bg-white">
+                        <div class="my-2 font-medium">
+                            <p>Totaal <span id="total"></span></p>
+                        </div>
+                        <div class="mt-4 flex justify-center">
+                            <button type="submit"
+                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 300px">Plaats
+                                bestelling</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="backdrop"></div>
