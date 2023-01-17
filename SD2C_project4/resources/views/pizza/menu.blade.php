@@ -41,14 +41,13 @@
                 <div>
                     <i class="bx bx-cart bx-lg" style="position: sticky; top: 0; color:red;"></i>
                 </div>
-
             </div>
         </div>
 
         <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <div class="orders-list p-4 flex-col items-start " style="height: calc(100vh - 200px);">
+                <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
                     <!-- Orders will be displayed here -->
 
                 </div>
@@ -59,7 +58,7 @@
                     <div class="mt-4 flex justify-center">
                         <button
                             class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                            style="width: 300px" onclick="showOrders()">Plaats
+                            style="width: 300px">Plaats
                             bestelling</button>
                     </div>
                 </div>

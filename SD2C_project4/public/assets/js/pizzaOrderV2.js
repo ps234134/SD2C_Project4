@@ -37,7 +37,7 @@ function addToOrder(pizzaId) {
     pizzaDiv.classList.add("order-item");
     // Add the pizza name, size, and price as text to the div
     pizzaDiv.innerHTML =
-        '<div class="order-box flex justify-between ">' +
+        '<div class="order-box flex justify-between py-4">' +
             '<div class="w-1/3">' +
                 '<h2 class="font-medium">' +
                     pizzaName +
