@@ -51,21 +51,26 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
                 <form method="GET" action="{{'/status'}}" >
                     @csrf
-                    <input type="hidden" name="pizza_name" value="{{ $pizza->pizza_name }}">
+                    {{-- <input type="hidden" name="pizza_name" value="{{ $pizza->pizza_name }}">
                     <input type="hidden" name="price">
                     <input type="hidden" name="size">
-                    <input type="hidden" name="total">
-                    <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
+                    <input type="hidden" name="total"> --}}
+                    <div class="orders-list flex-col items-start px-4 overflow-y-auto" style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
                     <div class="p-4 flex-col bg-white">
                         <div class="my-2 font-medium">
-                            <p>Totaal <span id="total"></span></p>
+                            <p>Totaal:  <span id="total">€0.00</span></p>
                         </div>
-                        <div class="mt-4 flex justify-center">
+                        <div class="mt-4 flex justify-between">
                             <button type="submit"
-                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                                style="width: 300px">Plaats
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Plaats
+                                bestelling</button>
+
+                                <button type="button" onclick="removeOrder()"
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Annuleer
                                 bestelling</button>
                         </div>
                     </div>
