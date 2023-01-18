@@ -60,12 +60,17 @@
                     </div>
                     <div class="p-4 flex-col bg-white">
                         <div class="my-2 font-medium">
-                            <p>Totaal <span id="total"></span></p>
+                            <p>Totaal:  <span id="total">€0.00</span></p>
                         </div>
-                        <div class="mt-4 flex justify-center">
+                        <div class="mt-4 flex justify-between">
                             <button type="submit"
-                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                                style="width: 300px">Plaats
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Plaats
+                                bestelling</button>
+
+                                <button type="button" onclick="removeOrder()"
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Annuleer
                                 bestelling</button>
                         </div>
                     </div>
