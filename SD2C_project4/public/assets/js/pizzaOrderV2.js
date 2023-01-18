@@ -1,3 +1,5 @@
+const { each } = require("lodash");
+
 //secures total price
 function hashData() {
     let hashedTotalServer = CryptoJS.SHA256(total);
@@ -24,7 +26,7 @@ function calculateTotal() {
             orderItems[i].getElementsByClassName("order-price")[0].innerHTML;
         price = parseFloat(price.substring(1));
         let quantity =
-            orderItems[i].getElementsByClassName("order-quantity")[0].innerHTML;
+            orderItems[i].getElementsByClassName("order-quantity")[0].value;
         total += price * quantity;
     }
     document.getElementById("total").innerHTML = "€" + total.toFixed(2);
@@ -41,6 +43,9 @@ function addToOrder(pizzaId) {
     let pizzaName = document.querySelector("#pizza-" + pizzaId).innerHTML;
     // Get the updated price from the p element
     let price = document.getElementById("price-" + pizzaId).innerHTML;
+
+    // count how many unique pizza orders there are in the order
+    let orderPizzaId = document.querySelector(".orders-list").childElementCount;
     // Create a new div to display the pizza in the order list
     let pizzaDiv = document.createElement("div");
     pizzaDiv.classList.add("order-item");
@@ -61,10 +66,12 @@ function addToOrder(pizzaId) {
         "</div>" +
         '<div class="flex justify-between border-b-2 py-4">' +
         '<div class="flex bg-white p-2 rounded-md shadow-md">' +
-        '<button onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
-        '<span class="order-quantity font-semibold px-6">1</span>' +
-        '<button onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
+        '<button type="button" onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
+        '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
+        '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
         "</div>" +
+        '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
+        '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
@@ -101,9 +108,9 @@ function updateCartQuantity(quantity) {
 function increaseOrder(element) {
     let orderItem = element.closest(".order-item");
     let quantitySpan = orderItem.querySelector(".order-quantity");
-    let newQuantity = parseInt(quantitySpan.innerHTML) + 1;
+    let newQuantity = parseInt(quantitySpan.value) + 1;
     let change = 1;
-    quantitySpan.innerHTML = newQuantity;
+    quantitySpan.value = newQuantity;
     calculateTotal();
     updateCartQuantity(change);
 }
@@ -112,11 +119,11 @@ function increaseOrder(element) {
 function decreaseOrder(element) {
     let orderItem = element.closest(".order-item");
     let quantitySpan = orderItem.querySelector(".order-quantity");
-    let newQuantity = parseInt(quantitySpan.innerHTML);
+    let newQuantity = parseInt(quantitySpan.value);
     if (newQuantity > 1) {
         let change = -1;
         newQuantity--;
-        quantitySpan.innerHTML = newQuantity;
+        quantitySpan.value = newQuantity;
         calculateTotal();
         updateCartQuantity(change);
     } else {
@@ -124,5 +131,20 @@ function decreaseOrder(element) {
         orderItem.remove();
         calculateTotal();
         updateCartQuantity(-1);
+        reassignPizzaOrderIDs();
     }
+}
+
+// searches the elements and assigns the new id's to them according to the order they are in.
+function reassignPizzaOrderIDs() {
+    let orderListElement = document.querySelector(".orders-list");
+    for (let i = 0; i < orderListElement.childElementCount; i++) {
+        let orderPizzaElement = orderListElement.children[i];
+        document.querySelector("#pizzaId").name = 'order[' + i + '][pizzaId]';
+        document.querySelector(".order-quantity").name = 'order[' + i + '][quantity]';
+        document.querySelector("#size").name = 'order[' + i + '][size]';
+    }
+
+
+
 }

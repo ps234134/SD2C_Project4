@@ -49,12 +49,12 @@
         <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <form method="GET" action="{{'/status'}}" >
+
+
+                <form method="POST" action="{{'/status'}}" >
                     @csrf
-                    <input type="hidden" name="pizza_name" value="{{ $pizza->pizza_name }}">
-                    <input type="hidden" name="price">
-                    <input type="hidden" name="size">
-                    <input type="hidden" name="total">
+                    <input type="hidden" name="status" value="Word bereid">
+               
                     <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
@@ -70,6 +70,7 @@
                         </div>
                     </div>
                 </form>
+                
             </div>
         </div>
         <div class="backdrop"></div>
