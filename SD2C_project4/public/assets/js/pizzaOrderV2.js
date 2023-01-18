@@ -144,7 +144,18 @@ function reassignPizzaOrderIDs() {
         document.querySelector(".order-quantity").name = 'order[' + i + '][quantity]';
         document.querySelector("#size").name = 'order[' + i + '][size]';
     }
-
-
-
 }
+
+//function to remove orders from the list
+function removeOrder() {
+    // Find all the order items
+    let orderItems = document.querySelectorAll(".order-item");
+    // Iterate through each order item and remove it from the orders-list element
+    orderItems.forEach(function(orderItem) {
+      orderItem.remove();
+    });
+    // Reset the total price
+    document.getElementById("total").innerHTML = "€0.00";
+    // Reset the cart quantity
+    updateCartQuantity(-Infinity);
+  }
