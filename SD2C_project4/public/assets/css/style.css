@@ -83,8 +83,8 @@ nav{
       .bottom-sticky {
         display: block;
         position: fixed;
-        bottom: 20px;
-        left: 20px;
+        top: 10px;
+        right: 20px;
         z-index: 99;
     }
 
