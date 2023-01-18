@@ -131,3 +131,5 @@ function removeOrder() {
   // Reset the cart quantity
   updateCartQuantity(-Infinity);
 }
+
+hoi
