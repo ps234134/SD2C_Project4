@@ -36,5 +36,8 @@ Route::get('/home', function() {
 Route::get('/contact', function() {
     return view('pizza.contact');
 });
+Route::get('/status', function() {
+    return view('pizza.status');
+});
 
 Route::resource('pizza', PizzaController::class);
