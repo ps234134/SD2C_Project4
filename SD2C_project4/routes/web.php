@@ -50,6 +50,6 @@ Route::resource('pizza', PizzaController::class);
 // Route::post('/status', [PizzaController::class, 'status']);
 
 // Route::post('/status', function(Request $request) {
-//     return dd($request);
+//     return view('pizza.status', ['id' => $request->id]);
 // });
-Route::post('/status/{pizza}', [pizzaController::class, 'show']);
+// Route::post('/status', [pizzaController::class, 'show']);

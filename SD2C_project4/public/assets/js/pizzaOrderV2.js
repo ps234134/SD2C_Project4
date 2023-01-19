@@ -92,6 +92,8 @@ function addToOrder(pizzaId) {
     document.querySelector("input[name='price']").value = price2;
     document.querySelector("input[name='size']").value = size;
     document.querySelector("input[name='total_price']").value = total_price;
+
+
 }
 
 // Function to update the quantity of items in the cart
@@ -157,5 +159,5 @@ function removeOrder() {
     // Reset the total price
     document.getElementById("total").innerHTML = "€0.00";
     // Reset the cart quantity
-    updateCartQuantity(-Infinity);
+    updateCartQuantity(-1);
   }
