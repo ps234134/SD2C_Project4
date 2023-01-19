@@ -59,7 +59,7 @@ class PizzaController extends Controller
     public function show(Pizza $id)
     {
         $pizza = Pizza::find($id);
-        return view('#', ['id' => $pizza[$id]], ['pizza' => $pizza]);
+        return view('pizza.status', ['id' => $pizza[$id]], ['pizza' => $pizza]);
     }
 
     /**
@@ -84,7 +84,7 @@ class PizzaController extends Controller
         session(['price' => $price]);
         session(['size' => $size]);
         session(['total_price' => $total_price]);
-        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
+        return view('pizza.status', compact('pizza_name', 'price', 'size', 'total_price'));
 
     }
     /**

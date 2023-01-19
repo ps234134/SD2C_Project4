@@ -37,6 +37,10 @@
             </div>
             <div class="order-list p-16">
                 <h1 class="font-medium text-lg">Je bestelling</h1>
+                <div class="order-items">
+                <p>{{$pizza_name}}</p>
+
+                </div>
             </div>
 
         </div>

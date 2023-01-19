@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,10 +37,19 @@ Route::get('/home', function() {
 Route::get('/contact', function() {
     return view('pizza.contact');
 });
-Route::get('/status', function() {
-    return view('pizza.status');
-});
-Route::post('/status', function() {
-    return view('pizza.status');
-});
+
+
 Route::resource('pizza', PizzaController::class);
+// Route::get('/status', function() {
+//     return view('pizza.status');
+// });
+// Route::post('/status', function() {
+//     return view('pizza.status');
+// });
+
+// Route::post('/status', [PizzaController::class, 'status']);
+
+// Route::post('/status', function(Request $request) {
+//     return dd($request);
+// });
+Route::post('/status/{pizza}', [pizzaController::class, 'show']);

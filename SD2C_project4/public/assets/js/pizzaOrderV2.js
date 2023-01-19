@@ -67,7 +67,7 @@ function addToOrder(pizzaId) {
         '<div class="flex justify-between border-b-2 py-4">' +
         '<div class="flex bg-white p-2 rounded-md shadow-md">' +
         '<button type="button" onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
-        '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
+        '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" style="width: 60px"/>' +
         '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
         "</div>" +
         '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
