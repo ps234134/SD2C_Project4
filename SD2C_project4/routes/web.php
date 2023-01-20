@@ -3,6 +3,8 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Order;
+use App\Models\OrderPizza;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,12 +45,14 @@ Route::get('/contact', function() {
 Route::resource('pizza', PizzaController::class);
 
 // Route::post('/status', function(Request $request) {
-//     return dd($request);
+
+
 // });
 
-Route::resource('order', OrderController::class);
+Route::post('/status', [OrderController::class, 'postStatus']);
+Route::resource('orders', OrderController::class);
 
-Route::post('/status', [OrderController::class, 'index']);
+// Route::post('/status', [OrderController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

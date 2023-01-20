@@ -7,7 +7,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
 use App\Models\OrderPizza;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -40,7 +40,7 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'quantity' => 'required|max:25',
@@ -66,7 +66,7 @@ class OrderController extends Controller
         ]);
         $orderPizza->save();
 
-        return redirect()->route('order.index')->with('success', 'Order saved.');
+        return redirect('/status')->with('success', 'Order saved.');
     }
 
     /**
@@ -105,7 +105,9 @@ class OrderController extends Controller
         session(['total_price' => $total_price]);
         return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
     }
-
+    public function postStatus(Request $request) {
+        return view('pizza.status', ['requestData' => $request]);
+    }
     /**
      * Update the specified resource in storage.
      *

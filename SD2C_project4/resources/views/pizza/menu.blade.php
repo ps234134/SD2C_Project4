@@ -51,7 +51,7 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
 
 
-                <form method="POST" action="{{route('order.store')}}" >
+                <form method="POST" action="{{'/status'}}" >
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
 
