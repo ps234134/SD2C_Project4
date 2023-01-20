@@ -3,10 +3,14 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
+<<<<<<< HEAD
 use App\Models\Order;
 use App\Models\OrderPizza;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+=======
+use Illuminate\Http\Request;
+>>>>>>> origin/test
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
@@ -44,7 +48,9 @@ Route::get('/contact', function() {
     return view('pizza.contact');
 });
 
+
 Route::resource('pizza', PizzaController::class);
+<<<<<<< HEAD
 
 // Route::post('/status', function(Request $request) {
 
@@ -57,3 +63,18 @@ Route::resource('orders', OrderController::class);
 // Route::post('/status', [OrderController::class, 'index']);
 Route::post('/status', [OrderController::class, 'store'])->name('pizza.status');
 
+=======
+// Route::get('/status', function() {
+//     return view('pizza.status');
+// });
+Route::post('/status', function() {
+    return view('pizza.status');
+});
+
+// Route::post('/status', [PizzaController::class, 'status']);
+
+// Route::post('/status', function(Request $request) {
+//     return view('pizza.status', ['id' => $request->id]);
+// });
+// Route::post('/status', [pizzaController::class, 'show']);
+>>>>>>> origin/test

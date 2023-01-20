@@ -68,11 +68,19 @@ function addToOrder(pizzaId) {
         '<div class="flex justify-between border-b-2 py-4">' +
         '<div class="flex bg-white p-2 rounded-md shadow-md">' +
         '<button type="button" onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
+<<<<<<< HEAD
         '<input name="orderRows[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
         '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
         "</div>" +
         '<input type="hidden" id="pizzaId" name="orderRows[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
         '<input type="hidden" id="size" name="orderRows[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
+=======
+        '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" style="width: 60px"/>' +
+        '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
+        "</div>" +
+        '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
+        '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
+>>>>>>> origin/test
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
@@ -84,6 +92,20 @@ function addToOrder(pizzaId) {
     //Add the quantity of the order to the cart
     updateCartQuantity(1);
 
+<<<<<<< HEAD
+=======
+    let pizza_name = document.querySelector("#pizza_name").value;
+    let price2 = document.querySelector("#price").value;
+    let size = document.querySelector("#size").value;
+    let total_price = document.querySelector("#total").value;
+
+    document.querySelector("input[name='pizza_name']").value = pizza_name;
+    document.querySelector("input[name='price']").value = price2;
+    document.querySelector("input[name='size']").value = size;
+    document.querySelector("input[name='total_price']").value = total_price;
+
+
+>>>>>>> origin/test
 }
 
 // Function to update the quantity of items in the cart
@@ -132,6 +154,7 @@ function reassignPizzaOrderIDs() {
     let orderListElement = document.querySelector(".orders-list");
     for (let i = 0; i < orderListElement.childElementCount; i++) {
         let orderPizzaElement = orderListElement.children[i];
+<<<<<<< HEAD
         document.querySelector("#pizzaId").name = 'orderRows[' + i + '][pizzaId]';
         document.querySelector(".order-quantity").name = 'orderRows[' + i + '][quantity]';
         document.querySelector("#size").name = 'orderRows[' + i + '][size]';
@@ -140,3 +163,24 @@ function reassignPizzaOrderIDs() {
 
 
 }
+=======
+        document.querySelector("#pizzaId").name = 'order[' + i + '][pizzaId]';
+        document.querySelector(".order-quantity").name = 'order[' + i + '][quantity]';
+        document.querySelector("#size").name = 'order[' + i + '][size]';
+    }
+}
+
+//function to remove orders from the list
+function removeOrder() {
+    // Find all the order items
+    let orderItems = document.querySelectorAll(".order-item");
+    // Iterate through each order item and remove it from the orders-list element
+    orderItems.forEach(function(orderItem) {
+      orderItem.remove();
+    });
+    // Reset the total price
+    document.getElementById("total").innerHTML = "€0.00";
+    // Reset the cart quantity
+    updateCartQuantity(-1);
+  }
+>>>>>>> origin/test

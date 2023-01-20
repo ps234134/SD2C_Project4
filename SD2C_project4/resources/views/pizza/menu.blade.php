@@ -51,7 +51,11 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
 
 
+<<<<<<< HEAD
                 <form method="POST" action="{{ route('pizza.status') }}">
+=======
+                <form method="POST" action="{{'/status'}}" >
+>>>>>>> origin/test
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
 
@@ -60,12 +64,26 @@
                     </div>
                     <div class="p-4 flex-col bg-white">
                         <div class="my-2 font-medium">
+<<<<<<< HEAD
                             <p>Totaal <span id="total"></span></p>
                         </div>
                         <div class="mt-4 flex justify-center">
                             <button type="submit"
                                 class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
                                 style="width: 300px">Plaats
+=======
+                            <p>Totaal:  <span id="total">€0.00</span></p>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button type="submit"
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Plaats
+                                bestelling</button>
+
+                                <button type="button" onclick="removeOrder()"
+                                class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                                style="width: 150px">Annuleer
+>>>>>>> origin/test
                                 bestelling</button>
                         </div>
                     </div>
