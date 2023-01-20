@@ -38,7 +38,7 @@
             <div class="order-list p-16">
                 <h1 class="font-medium text-lg">Je bestelling</h1>
                 <div class="order-items">
-                    <h2>{{ $pizza->pizza_name }}</h2>
+                    {{-- <h2>{{ $pizza->pizza_name }}</h2> --}}
 
                 </div>
             </div>
