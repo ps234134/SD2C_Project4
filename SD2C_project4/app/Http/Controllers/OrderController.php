@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
+use App\OrderPizza;
 use GuzzleHttp\Psr7\Request;
 
 class OrderController extends Controller
@@ -16,8 +17,10 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //not relevant as we don't have several orders to show for the customer (yet)
+    { 
+    $orderPizzas = OrderPizza::all();
+    return view('orders.index', compact('orderPizzas'));
+
     }
 
     /**
@@ -27,6 +30,7 @@ class OrderController extends Controller
      */
     public function create($request)
     {
+
        
     }
 
@@ -38,11 +42,32 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+        $request->validate([
+            'quantity' => 'required|max:25',
+            'pizzaId' => 'required|max:11',
+            'size' => 'required|max:20',
+            'status' => 'required|max:191',
+        ]);
+    
+        // Create a new order
+        $order = new Order([
+            'status' => $request->get('status'),
+        ]);
+        $order->save();
+        dd($order);
+       
 
-        $order = Order::find($request->order_id);
-        $pizza = Pizza::find($request->pizza_id);
-        //ataches pizza to order and sets the quantity of the pizza on the order.
-        $order->pizzas()->attach($pizza->id, ['quantity' => $request->quantity]);
+
+        // Create a new order_pizza
+        $orderPizza = new OrderPizza([
+            'order_id' => $order->id,
+            'quantity' => $request->get('quantity'),
+            'pizza_id' => $request->get('pizzaId'),
+            'size' => $request->get('size'),
+        ]);
+        $orderPizza->save();
+    
+        return redirect('/status')->with('success', 'Order saved.');  
     }
 
     /**
@@ -54,7 +79,7 @@ class OrderController extends Controller
     public function show(Order $id)
     {
         $order = Order::find($id);
-        return view('#', ['id' => $order[$id]], ['order' => $order]);
+        return view('/status', ['id' => $order[$id]], ['order' => $order]);
     }
 
     /**
@@ -68,19 +93,19 @@ class OrderController extends Controller
         //not needed
     }
 
-    public function status(Request $request) {
-        $pizza_name = $request->input('pizza_name');
-        $price = $request->input('price');
-        $size = $request->input('size');
-        $total_price = $request->input('total_price');
+    // public function status(Request $request) {
+    //     $pizza_name = $request->input('pizza_name');
+    //     $price = $request->input('price');
+    //     $size = $request->input('size');
+    //     $total_price = $request->input('total_price');
 
-        //store in session or pass to view
-        session(['pizza_name' => $pizza_name]);
-        session(['price' => $price]);
-        session(['size' => $size]);
-        session(['total_price' => $total_price]);
-        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
-    }
+    //     //store in session or pass to view
+    //     session(['pizza_name' => $pizza_name]);
+    //     session(['price' => $price]);
+    //     session(['size' => $size]);
+    //     session(['total_price' => $total_price]);
+    //     return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -91,23 +116,23 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $id)
     {
-        $validatedData = $request->validate([
-            'order_id' => 'required|exists:orders,id',
-            'pizza_name' => 'required|exists:pizzas,pizza_name',
-            'base_price' => 'required|exists:pizzas,base_price',
-            'quantity' => 'required|excists:order_pizza,quantity',
-            'size' => 'required',
+        // $validatedData = $request->validate([
+        //     'order_id' => 'required|exists:orders,id',
+        //     'pizza_name' => 'required|exists:pizzas,pizza_name',
+        //     'base_price' => 'required|exists:pizzas,base_price',
+        //     'quantity' => 'required|excists:order_pizza,quantity',
+        //     'size' => 'required',
 
-        ]);
-        $order = Order::find($id);
-        $order->pizza_name = $request->get('pizza_name');
-        $order->base_price = $request->get('base_price');
-        $order->quantity = $request->get('quantity');
+        // ]);
+        // $order = Order::find($id);
+        // $order->pizza_name = $request->get('pizza_name');
+        // $order->base_price = $request->get('base_price');
+        // $order->quantity = $request->get('quantity');
 
-        $order->save();
+        // $order->save();
 
-        return redirect('#')
-            ->with('success', 'Order updated successfully');
+        // return redirect('#')
+        //     ->with('success', 'Order updated successfully');
     }
 
     /**

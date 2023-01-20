@@ -50,6 +50,7 @@ function addToOrder(pizzaId) {
     let pizzaDiv = document.createElement("div");
     pizzaDiv.classList.add("order-item");
     // Add the pizza name, size, and price as text to the div
+    //request data is saved in the hidden input  and is put into a dimmensional array
     pizzaDiv.innerHTML =
         '<div class="order-box flex justify-between py-4">' +
         '<div class="w-1/3">' +
@@ -67,11 +68,11 @@ function addToOrder(pizzaId) {
         '<div class="flex justify-between border-b-2 py-4">' +
         '<div class="flex bg-white p-2 rounded-md shadow-md">' +
         '<button type="button" onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
-        '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
+        '<input name="orderRows[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
         '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
         "</div>" +
-        '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
-        '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
+        '<input type="hidden" id="pizzaId" name="orderRows[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
+        '<input type="hidden" id="size" name="orderRows[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
@@ -140,9 +141,9 @@ function reassignPizzaOrderIDs() {
     let orderListElement = document.querySelector(".orders-list");
     for (let i = 0; i < orderListElement.childElementCount; i++) {
         let orderPizzaElement = orderListElement.children[i];
-        document.querySelector("#pizzaId").name = 'order[' + i + '][pizzaId]';
-        document.querySelector(".order-quantity").name = 'order[' + i + '][quantity]';
-        document.querySelector("#size").name = 'order[' + i + '][size]';
+        document.querySelector("#pizzaId").name = 'orderRows[' + i + '][pizzaId]';
+        document.querySelector(".order-quantity").name = 'orderRows[' + i + '][quantity]';
+        document.querySelector("#size").name = 'orderRows[' + i + '][size]';
     }
 
 
