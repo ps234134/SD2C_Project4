@@ -42,32 +42,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        $request->validate([
-            'quantity' => 'required|max:25',
-            'pizzaId' => 'required|max:11',
-            'size' => 'required|max:20',
-            'status' => 'required|max:191',
-        ]);
-    
-        // Create a new order
-        $order = new Order([
-            'status' => $request->get('status'),
-        ]);
-        $order->save();
-        dd($order);
-       
-
-
-        // Create a new order_pizza
-        $orderPizza = new OrderPizza([
-            'order_id' => $order->id,
-            'quantity' => $request->get('quantity'),
-            'pizza_id' => $request->get('pizzaId'),
-            'size' => $request->get('size'),
-        ]);
-        $orderPizza->save();
-    
-        return redirect('/status')->with('success', 'Order saved.');  
+        return view('status')->with($request->all());
     }
 
     /**
@@ -93,19 +68,19 @@ class OrderController extends Controller
         //not needed
     }
 
-    // public function status(Request $request) {
-    //     $pizza_name = $request->input('pizza_name');
-    //     $price = $request->input('price');
-    //     $size = $request->input('size');
-    //     $total_price = $request->input('total_price');
+    public function status(Request $request) {
+        $pizza_name = $request->input('pizza_name');
+        $price = $request->input('price');
+        $size = $request->input('size');
+        $total_price = $request->input('total_price');
 
-    //     //store in session or pass to view
-    //     session(['pizza_name' => $pizza_name]);
-    //     session(['price' => $price]);
-    //     session(['size' => $size]);
-    //     session(['total_price' => $total_price]);
-    //     return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
-    // }
+        //store in session or pass to view
+        session(['pizza_name' => $pizza_name]);
+        session(['price' => $price]);
+        session(['size' => $size]);
+        session(['total_price' => $total_price]);
+        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
+    }
 
     /**
      * Update the specified resource in storage.
