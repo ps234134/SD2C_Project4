@@ -51,10 +51,10 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
 
 
-                <form method="POST" action="{{'/status'}}" >
+                <form method="POST" action="{{route('order.store')}}" >
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
-               
+
                     <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div>
         <div class="backdrop"></div>

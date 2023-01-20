@@ -14,4 +14,9 @@ class Order extends Model
     {
         return $this->hasMany(Pizza::class);
     }
+
+    public function orderPizzas()
+    {
+        return $this->hasMany(OrderPizza::class);
+    }
 }

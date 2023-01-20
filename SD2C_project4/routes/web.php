@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-require __DIR__.'/auth.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +32,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
 Route::get('/menu', [PizzaController::class, 'index']);
 Route::get('/home', function() {
     return view('pizza.index');
@@ -48,5 +46,9 @@ Route::resource('pizza', PizzaController::class);
 //     return dd($request);
 // });
 
-Route::post('/status', [OrderController::class, 'store'])->name('pizza.status');
+Route::resource('order', OrderController::class);
 
+Route::post('/status', [OrderController::class, 'index']);
+
+
+require __DIR__.'/auth.php';
