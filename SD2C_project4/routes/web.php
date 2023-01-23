@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// require __DIR__.'/auth.php';
 
 
 Route::get('/dashboard', function () {
@@ -28,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
 
 Route::get('/menu', [PizzaController::class, 'index']);
 Route::get('/home', function() {
@@ -40,16 +42,8 @@ Route::get('/contact', function() {
 
 
 Route::resource('pizza', PizzaController::class);
-// Route::get('/status', function() {
-//     return view('pizza.status');
-// });
-Route::post('/status', function() {
-    return view('pizza.status');
-});
 
-// Route::post('/status', [PizzaController::class, 'status']);
 
-// Route::post('/status', function(Request $request) {
-//     return view('pizza.status', ['id' => $request->id]);
-// });
-// Route::post('/status', [pizzaController::class, 'show']);
+Route::post('/status', [OrderController::class, 'store'])->name('pizza.status');
+
+

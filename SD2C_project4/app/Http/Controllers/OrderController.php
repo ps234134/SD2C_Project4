@@ -27,47 +27,10 @@ class OrderController extends Controller
      */
     public function create($request)
     {
-        $validatedData = $request->validate([
-            'id' => 'required|exists:pizzas,id',
-            'base_price' => 'required|exists:pizzas,base_price',
-            'size' => 'required',
+      
+        
 
-        ]);
-
-        // Calculate Order Price
-        $pizza = Pizza::find($validatedData['id']);
-        $base_price = $validatedData['base_price'];
-        $size = $validatedData['size'];
-
-
-        switch ($size) {
-            case ('small'):
-                $size_price = $base_price * 0.8;
-
-                break;
-
-            case ('medium'):
-                $size_price = $base_price * 1;
-                break;
-
-            case ('large'):
-                $size_price = $base_price * 1.2;
-                break;
-
-            default:
-                return view('#')->with('size', $size)->with('fail', 'something went wrong with choosing a size');
-        }
-
-        // Create a new order
-        $order = new Order();
-        $order->pizza_id = $validatedData['pizza_id'];
-        $order->size = $validatedData['size'];
-
-        $order->total_price += $size_price;
-        $order->save();
-
-        // Send the order details to the view
-        return view('#')->with('order', $order);
+  
     }
 
     /**
@@ -78,11 +41,11 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+ 
 
-        $order = Order::find($request->order_id);
-        $pizza = Pizza::find($request->pizza_id);
-        //ataches pizza to order and sets the quantity of the pizza on the order.
-        $order->pizzas()->attach($pizza->id, ['quantity' => $request->quantity]);
+        return view('pizza.status', [
+            'pizzas' => $request->all()
+        ]);
     }
 
     /**
@@ -108,19 +71,7 @@ class OrderController extends Controller
         //not needed
     }
 
-    public function status(Request $request) {
-        $pizza_name = $request->input('pizza_name');
-        $price = $request->input('price');
-        $size = $request->input('size');
-        $total_price = $request->input('total_price');
-
-        //store in session or pass to view
-        session(['pizza_name' => $pizza_name]);
-        session(['price' => $price]);
-        session(['size' => $size]);
-        session(['total_price' => $total_price]);
-        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -131,23 +82,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $id)
     {
-        $validatedData = $request->validate([
-            'order_id' => 'required|exists:orders,id',
-            'pizza_name' => 'required|exists:pizzas,pizza_name',
-            'base_price' => 'required|exists:pizzas,base_price',
-            'quantity' => 'required|excists:order_pizza,quantity',
-            'size' => 'required',
-
-        ]);
-        $order = Order::find($id);
-        $order->pizza_name = $request->get('pizza_name');
-        $order->base_price = $request->get('base_price');
-        $order->quantity = $request->get('quantity');
-
-        $order->save();
-
-        return redirect('#')
-            ->with('success', 'Order updated successfully');
+       ;
     }
 
     /**
