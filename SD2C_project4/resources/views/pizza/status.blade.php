@@ -21,7 +21,8 @@
 
                 </tr>
                 {{$order->status}}
-          
+            <!--- gets an array of Pizza models from the Order model trough the pizzas relation in Order model
+                    with pivot you refer to the pivot table info--->
                 @foreach($order->pizzas as $pizza) 
                     {{ $pizza->pivot->quantity}}
 

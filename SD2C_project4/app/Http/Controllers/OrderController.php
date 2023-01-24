@@ -88,11 +88,11 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $id)
-    {
-        $order = Order::find($id);
-        return view('#', ['id' => $order[$id]], ['order' => $order]);
-    }
+    // public function show(Order $id)
+    // {
+    //     $order = Order::find($id);
+    //     return view('#', ['id' => $order[$id]], ['order' => $order]);
+    // }
 
     /**
      * Show the form for editing the specified resource.
