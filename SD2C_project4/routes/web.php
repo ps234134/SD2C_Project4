@@ -44,6 +44,6 @@ Route::get('/contact', function() {
 Route::resource('pizza', PizzaController::class);
 
 
-Route::post('/status', [OrderController::class, 'store'])->name('pizza.status');
-
+Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
+Route::get('/status', [OrderController::class, 'status'])->name('order.show');
 

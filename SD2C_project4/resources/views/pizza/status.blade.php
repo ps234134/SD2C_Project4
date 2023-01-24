@@ -16,13 +16,19 @@
                     <th>Size</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                   
+
+
                 </tr>
+                {{$order->status}}
+          
+                @foreach($order->pizzas as $pizza) 
+                    {{ $pizza->pivot->quantity}}
+
+                @endforeach
             </thead>
             <tbody>
-                <!-- reads out the array, wip not sure if it works yet -->
-             @foreach($request as $key => $value)
-            <p>{{ $key }}: {{ $value }}</p> 
-            @endforeach
+                
             </tbody>
         </table>
     </div>

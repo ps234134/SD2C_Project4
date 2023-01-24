@@ -51,7 +51,7 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
 
 
-                <form action="{{ route('pizza.status') }}" method="POST">
+                <form action="{{ route('pizza.order') }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
 

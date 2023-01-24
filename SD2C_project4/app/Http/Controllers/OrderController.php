@@ -6,7 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
-
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 class OrderController extends Controller
 {
@@ -39,13 +39,27 @@ class OrderController extends Controller
     // public function store(StoreOrderRequest $request)
     public function store(Request $request)
     {
-        dd($request->all());
-        // $items = $request->order[0];
-        // foreach($items as $item)
-        // {
-        //     doe iets met $item 
-        // }
-     
+        // dd($request->all());
+
+          // Create a new order and save it to the database
+          $order = new Order([
+            'status' => $request->status,
+        ]);  
+        $order->save();
+
+        // reads values from order array and saves them as seperate variables to make a db entry in order_pizza
+        foreach ($request->order as $orderItem) {
+            //  dd($order);
+                $quantity = $orderItem['quantity'];
+                $pizzaId = $orderItem['pizzaId'];
+                $size = $orderItem['size'];
+                // dd($size);  
+                
+                $pizza = Pizza::find($pizzaId);
+                $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
+                
+        }
+        
         // // Validate the request data
         // $request->validate([
         //     'quantity' => 'required',
@@ -53,25 +67,18 @@ class OrderController extends Controller
         //     'size' => 'required',
         //     'status' => 'required',
         // ]);
-       
-       
-        // Create a new order and save it to the database
-        $order = new Order([
-            'status' => $request->status,
-        ]);
-     
-        $order->save();
     
-        
-        $pizza = Pizza::find($request->get('pizzaId'));
-    
-        // Attach the pizza to the order and save the relationship to the order_pizza table
-        $order->pizzas()->attach($pizza, [
-            'size' => $request->get('size'),
-            'quantity' => $request->get('quantity'),
-        ]);
-    
-        return redirect('/status')->with('success', 'Order placed successfully.');
+        // adds orderId with the value of the id from $order
+        return redirect()->route('order.show', ['orderId' => $order->id]);
+    }
+
+    public function status (Request $request){
+
+        $order=Order::find($request->orderId);
+        // dd($order);
+
+        return view('pizza.status', ['order' => $order]);
+
     }
     
 
