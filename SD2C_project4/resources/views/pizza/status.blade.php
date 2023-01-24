@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                reads out the array, wip not sure if it works yet
+                <!-- reads out the array, wip not sure if it works yet -->
              @foreach($request as $key => $value)
             <p>{{ $key }}: {{ $value }}</p> 
             @endforeach

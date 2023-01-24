@@ -50,6 +50,7 @@ function addToOrder(pizzaId) {
     let pizzaDiv = document.createElement("div");
     pizzaDiv.classList.add("order-item");
     // Add the pizza name, size, and price as text to the div
+    //request data is saved in the hidden input  and is put into a dimmensional array
     pizzaDiv.innerHTML =
         '<div class="order-box flex justify-between py-4">' +
         '<div class="w-1/3">' +
@@ -154,10 +155,10 @@ function removeOrder() {
     let orderItems = document.querySelectorAll(".order-item");
     // Iterate through each order item and remove it from the orders-list element
     orderItems.forEach(function(orderItem) {
-      orderItem.remove();
+        orderItem.remove();
     });
     // Reset the total price
     document.getElementById("total").innerHTML = "€0.00";
     // Reset the cart quantity
     updateCartQuantity(-1);
-  }
+}

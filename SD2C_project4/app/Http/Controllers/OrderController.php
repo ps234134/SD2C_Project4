@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //not relevant as we don't have several orders to show for the customer (yet)
+    
     }
 
     /**
@@ -27,10 +27,7 @@ class OrderController extends Controller
      */
     public function create($request)
     {
-      
         
-
-  
     }
 
     /**
@@ -39,14 +36,44 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    // public function store(StoreOrderRequest $request)
+    public function store(Request $request)
     {
- 
-
-        return view('pizza.status', [
-            'pizzas' => $request->all()
+        dd($request->all());
+        // $items = $request->order[0];
+        // foreach($items as $item)
+        // {
+        //     doe iets met $item 
+        // }
+     
+        // // Validate the request data
+        // $request->validate([
+        //     'quantity' => 'required',
+        //     'pizzaId' => 'required',
+        //     'size' => 'required',
+        //     'status' => 'required',
+        // ]);
+       
+       
+        // Create a new order and save it to the database
+        $order = new Order([
+            'status' => $request->status,
         ]);
+     
+        $order->save();
+    
+        
+        $pizza = Pizza::find($request->get('pizzaId'));
+    
+        // Attach the pizza to the order and save the relationship to the order_pizza table
+        $order->pizzas()->attach($pizza, [
+            'size' => $request->get('size'),
+            'quantity' => $request->get('quantity'),
+        ]);
+    
+        return redirect('/status')->with('success', 'Order placed successfully.');
     }
+    
 
     /**
      * Display the specified resource.
