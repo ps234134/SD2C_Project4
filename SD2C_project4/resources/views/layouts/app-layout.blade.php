@@ -15,6 +15,7 @@
     <script type="text/javascript" src="./assets/js/pizzaOrderV2.js"></script>
 
 
+
     @vite('resources/css/app.css')
     <title>Stonks Pizza</title>
 
@@ -23,7 +24,7 @@
 <body>
 
     <div class="d-flex flex-column min-vh-100">
-        <div>
+        <div> 
             <!-- Your header content here -->
             <header>
                 @include('layouts.nav')

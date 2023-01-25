@@ -1,3 +1,18 @@
+/* Order popup*/
+
+function showOrders(){
+    var container = document.querySelector('.bestellingen-container');
+    var backdrop = document.querySelector('.backdrop');
+    container.classList.toggle('show');
+    backdrop.classList.toggle('show');
+}
+document.querySelector('.shopping-cart-icon').addEventListener('click', showOrders);
+document.querySelector('.backdrop').addEventListener('click', showOrders);
+
+
+
+/*update price van pizza door size*/
+
 function updatePrice(pizzaId, sizeMultiplier) {
     let basePrice = basePrices[pizzaId];
     let updatedPrice = basePrice * sizeMultiplier;
@@ -6,6 +21,8 @@ function updatePrice(pizzaId, sizeMultiplier) {
     priceElement.setAttribute("data-price", updatedPrice);
 }
 
+/*
+*calculate the total when add order to order-list */
 function calculateTotal() {
     let orderList = document.getElementsByClassName("orders-list")[0];
     let orderItems = orderList.getElementsByClassName("order-item");

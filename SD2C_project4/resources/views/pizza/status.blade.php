@@ -39,37 +39,44 @@
             </div>
             <div class="order-list p-16">
                 <h1 class="font-medium text-lg my-6">Je bestelling</h1>
-
-                <div class="status-items flex flex-wrap">
-                    @php
-                        $total = 0;
-                    @endphp
-                    <!--- gets an array of Pizza models from the Order model trough the pizzas relation in Order model
-                                    with pivot you refer to the pivot table info--->
-                    @foreach ($order->pizzas as $pizza)
-                        <div class="orders flex justify-between my-6 rounded-lg shadow-md bg-gray-100 p-4 ">
-                            <div>
-                                <p>{{ $pizza->pizza_name }}</p>
-                                <p>Grootte: {{ $pizza->pivot->size }}</p>
-                                <p>Hoeveelheid: {{ $pizza->pivot->quantity }}</p>
-                                <p>Prijs: €{{ number_format($pizza->calculated_price, 2) }}</p>
-                            </div>
-                            <div>
-                                <img id="status-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
-                            </div>
-                        </div>
-
+                <form action="{{route('order.destroy', $order)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="status-items flex flex-wrap">
                         @php
-                            $total += $pizza->calculated_price * $pizza->pivot->quantity;
+                            $total = 0;
                         @endphp
+                        <!--- gets an array of Pizza models from the Order model trough the pizzas relation in Order model
+                                            with pivot you refer to the pivot table info--->
+                        @foreach ($order->pizzas as $pizza)
+                            <div class="orders flex justify-between my-6 rounded-lg shadow-md bg-gray-100 p-4 ">
+                                <div>
+                                    <p>{{ $pizza->pizza_name }}</p>
+                                    <p>Grootte: {{ $pizza->pivot->size }}</p>
+                                    <p>Hoeveelheid: {{ $pizza->pivot->quantity }}</p>
+                                    <p>Prijs: €{{ number_format($pizza->calculated_price, 2) }}</p>
+                                </div>
+                                <div>
+                                    <img id="status-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
+                                </div>
+                            </div>
 
-                    @endforeach
+                            @php
+                                $total += $pizza->calculated_price * $pizza->pivot->quantity;
+                            @endphp
+                        @endforeach
 
 
-                </div>
-                <div>
-                    <p id="status_total" class="rounded-lg shadow-md bg-gray-100 p-4 ">Totaal: €{{number_format($total,2)}}</p>
-                </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <p id="status_total" class="rounded-lg shadow-md bg-gray-100 p-4 ">Totaal:
+                            €{{ number_format($total, 2) }}</p>
+                        <button type="submit"
+                            class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
+                            style="width: 150px">Annuleer
+                            bestelling</button>
+                    </div>
+                </form>
             </div>
         </div>
 

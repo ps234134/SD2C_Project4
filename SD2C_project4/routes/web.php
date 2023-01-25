@@ -41,9 +41,12 @@ Route::get('/contact', function() {
 
 
 Route::resource('pizza', PizzaController::class);
+Route::resource('order', OrderController::class);
 
 // this route is a intermidiate step for the store method and doesn't have an acutal page!
 Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
 
 Route::get('/status', [OrderController::class, 'status'])->name('order.show');
+
+
 

@@ -24,7 +24,7 @@ class OrderController extends Controller
     // public function store(StoreOrderRequest $request)
     public function store(Request $request)
     {
-         // * will validate everything from the order array, with the given keys after *.
+        // * will validate everything from the order array, with the given keys after *.
         $request->validate([
 
             'order.*.quantity' => 'required|numeric',
@@ -33,8 +33,8 @@ class OrderController extends Controller
         ]);
 
 
-          // Create a new order and save it to the database
-          $order = new Order([
+        // Create a new order and save it to the database
+        $order = new Order([
             'status' => $request->status,
         ]);
         $order->save();
@@ -69,7 +69,7 @@ class OrderController extends Controller
     public function status(Request $request)
     {
 
-        $order=Order::find($request->orderId);
+        $order = Order::find($request->orderId);
         foreach ($order->pizzas as $pizza) {
             switch ($pizza->pivot->size) {
                 case 'Small':
@@ -84,9 +84,8 @@ class OrderController extends Controller
                 default:
                     $pizza->calculated_price = $pizza->base_price;
             }
-
         }
-    return view('pizza.status', ['order' => $order]);
+        return view('pizza.status', ['order' => $order]);
     }
 
 
@@ -96,15 +95,14 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Order $order)
-    // {
-    //     $order->delete();
+    public function destroy(Order $order)
+    {
+        // Delete all the order_pizza relationships associated with the order
+        $order->pizzas()->detach();
 
-    //     return redirect('#')
-    //         ->with('success', 'order deleted successfully');
-    //     $order = Order::find($request->orderId);
-    //     // dd($order);
+        // Delete the order
+        $order->delete();
 
-    //     return view('pizza.status', ['order' => $order]);
-    // }
+        return redirect('/home')->with('success', 'Bestelling verwijderd.');
+    }
 }

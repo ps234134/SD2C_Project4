@@ -9,13 +9,13 @@
                     @endif
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
-                    <div class="relative flex justify-center">
-                        <img id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
+                    <div class="relative flex justify-center ">
+                        <img class="rounded-lg shadow-md" id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
                     <script>
                         let basePrices = {};
                     </script>
-                 
+
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
