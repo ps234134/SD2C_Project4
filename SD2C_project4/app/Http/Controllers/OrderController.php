@@ -84,6 +84,7 @@ class OrderController extends Controller
                 default:
                     $pizza->calculated_price = $pizza->base_price;
             }
+
         }
     return view('pizza.status', ['order' => $order]);
     }
