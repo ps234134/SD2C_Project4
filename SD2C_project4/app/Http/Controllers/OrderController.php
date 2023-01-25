@@ -10,27 +10,10 @@ use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 
+use PhpParser\Node\Stmt\TryCatch;
+
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($request)
-    {
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,8 +24,14 @@ class OrderController extends Controller
     // public function store(StoreOrderRequest $request)
     public function store(Request $request)
     {
+         // * will validate everything from the order array, with the given keys after *.
+        $request->validate([
 
-        // dd($request->all());
+            'order.*.quantity' => 'required|numeric',
+            'order.*.pizzaId' => 'required|exists:pizzas,id',
+            'order.*.size' => 'required|in:Small,Medium,Large',
+        ]);
+
 
           // Create a new order and save it to the database
           $order = new Order([
@@ -50,9 +39,18 @@ class OrderController extends Controller
         ]);
         $order->save();
 
-        // reads values from order array and saves them as seperate variables to make a db entry in order_pizza
-        foreach ($request->order as $orderItem) {
-            //  dd($order);
+
+        try {
+
+            // Create a new order and save it to the database
+            $order = new Order([
+                'status' => $request->status,
+            ]);
+            $order->save();
+
+            // reads values from order array and saves them as seperate variables to make a db entry in order_pizza
+            foreach ($request->order as $orderItem) {
+                //  dd($order);
                 $quantity = $orderItem['quantity'];
                 $pizzaId = $orderItem['pizzaId'];
                 $size = $orderItem['size'];
@@ -61,78 +59,40 @@ class OrderController extends Controller
                 $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
 
 
+                $pizza = Pizza::find($pizzaId);
+                $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
+            }
+
+            // adds orderId with the value of the id from $order
+            return redirect()->route('order.show', ['orderId' => $order->id]);
+        } catch (\Throwable $th) {
+
+            return redirect()->back()->with('error', 'Error message')->with('alert', 'alert("Plaats uw order")');
         }
-
-        // // Validate the request data
-        // $request->validate([
-        //     'quantity' => 'required',
-        //     'pizzaId' => 'required',
-        //     'size' => 'required',
-        //     'status' => 'required',
-        // ]);
-
-        // adds orderId with the value of the id from $order
-        return redirect()->route('order.show', ['orderId' => $order->id]);
     }
 
-    public function status (Request $request){
+    public function status(Request $request)
+    {
 
         $order=Order::find($request->orderId);
-    foreach ($order->pizzas as $pizza) {
-        switch ($pizza->pivot->size) {
-            case 'Small':
-                $pizza->calculated_price = $pizza->base_price * 0.8;
-                break;
-            case 'Medium':
-                $pizza->calculated_price = $pizza->base_price;
-                break;
-            case 'Large':
-                $pizza->calculated_price = $pizza->base_price * 1.2;
-                break;
-            default:
-                $pizza->calculated_price = $pizza->base_price;
+        foreach ($order->pizzas as $pizza) {
+            switch ($pizza->pivot->size) {
+                case 'Small':
+                    $pizza->calculated_price = $pizza->base_price * 0.8;
+                    break;
+                case 'Medium':
+                    $pizza->calculated_price = $pizza->base_price;
+                    break;
+                case 'Large':
+                    $pizza->calculated_price = $pizza->base_price * 1.2;
+                    break;
+                default:
+                    $pizza->calculated_price = $pizza->base_price;
+            }
         }
-    }
     return view('pizza.status', ['order' => $order]);
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(Order $id)
-    // {
-    //     $order = Order::find($id);
-    //     return view('#', ['id' => $order[$id]], ['order' => $order]);
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //not needed
-    }
-
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOrderRequest  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOrderRequest $request, Order $id)
-    {
-       ;
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -146,5 +106,9 @@ class OrderController extends Controller
 
         return redirect('#')
             ->with('success', 'order deleted successfully');
+        $order = Order::find($request->orderId);
+        // dd($order);
+
+        return view('pizza.status', ['order' => $order]);
     }
 }
