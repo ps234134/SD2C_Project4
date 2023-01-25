@@ -44,6 +44,7 @@ function addToOrder(pizzaId) {
     // Get the updated price from the p element
     let price = document.getElementById("price-" + pizzaId).innerHTML;
 
+
     // count how many unique pizza orders there are in the order
     let orderPizzaId = document.querySelector(".orders-list").childElementCount;
     // Create a new div to display the pizza in the order list
@@ -73,6 +74,7 @@ function addToOrder(pizzaId) {
         "</div>" +
         '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
         '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
+        '<input type="hidden" id="price" name="order[' + orderPizzaId + '][price]" value="' + price + '" />' +
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
@@ -83,16 +85,6 @@ function addToOrder(pizzaId) {
     calculateTotal();
     //Add the quantity of the order to the cart
     updateCartQuantity(1);
-
-    let pizza_name = document.querySelector("#pizza_name").value;
-    let price2 = document.querySelector("#price").value;
-    let size = document.querySelector("#size").value;
-    let total_price = document.querySelector("#total").value;
-
-    document.querySelector("input[name='pizza_name']").value = pizza_name;
-    document.querySelector("input[name='price']").value = price2;
-    document.querySelector("input[name='size']").value = size;
-    document.querySelector("input[name='total_price']").value = total_price;
 
 
 }
