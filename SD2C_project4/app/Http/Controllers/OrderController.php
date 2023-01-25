@@ -23,9 +23,17 @@ class OrderController extends Controller
     // public function store(StoreOrderRequest $request)
     public function store(Request $request)
     {
+        // * will validate everything from the order array, with the given keys after *.
+        $request->validate([
+                
+            'order.*.quantity' => 'required|numeric',
+            'order.*.pizzaId' => 'required|exists:pizzas,id',
+            'order.*.size' => 'required|in:Small,Medium,Large',
+        ]);
         try {
 
             // dd($request->all());
+         
 
             // Create a new order and save it to the database
             $order = new Order([
@@ -39,19 +47,13 @@ class OrderController extends Controller
                 $quantity = $orderItem['quantity'];
                 $pizzaId = $orderItem['pizzaId'];
                 $size = $orderItem['size'];
+
+           
                 // dd($size);  
 
                 $pizza = Pizza::find($pizzaId);
                 $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
             }
-
-            // // Validate the request data
-            // $request->validate([
-            //     'quantity' => 'required',
-            //     'pizzaId' => 'required',
-            //     'size' => 'required',
-            //     'status' => 'required',
-            // ]);
 
             // adds orderId with the value of the id from $order
             return redirect()->route('order.show', ['orderId' => $order->id]);
