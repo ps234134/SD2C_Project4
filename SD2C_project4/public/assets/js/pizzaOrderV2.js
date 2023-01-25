@@ -160,5 +160,5 @@ function removeOrder() {
     // Reset the total price
     document.getElementById("total").innerHTML = "€0.00";
     // Reset the cart quantity
-    updateCartQuantity(-1);
+    updateCartQuantity(-1 * document.getElementById("cart-quantity").innerHTML);
 }

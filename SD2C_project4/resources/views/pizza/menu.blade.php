@@ -55,7 +55,7 @@
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
 
-                    <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
+                    <div class="orders-list flex-col items-start px-4 overflow-y-auto" style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
                     <div class="p-4 flex-col bg-white">
