@@ -8,9 +8,9 @@ use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
 
-use PhpParser\Node\Stmt\TryCatch;
+
+
 
 class OrderController extends Controller
 {
@@ -50,14 +50,9 @@ class OrderController extends Controller
 
             // reads values from order array and saves them as seperate variables to make a db entry in order_pizza
             foreach ($request->order as $orderItem) {
-                //  dd($order);
                 $quantity = $orderItem['quantity'];
                 $pizzaId = $orderItem['pizzaId'];
                 $size = $orderItem['size'];
-                // dd($size);
-                $pizza = Pizza::find($pizzaId);
-                $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
-
 
                 $pizza = Pizza::find($pizzaId);
                 $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
@@ -100,15 +95,15 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
-    {
-        $order->delete();
+    // public function destroy(Order $order)
+    // {
+    //     $order->delete();
 
-        return redirect('#')
-            ->with('success', 'order deleted successfully');
-        $order = Order::find($request->orderId);
-        // dd($order);
+    //     return redirect('#')
+    //         ->with('success', 'order deleted successfully');
+    //     $order = Order::find($request->orderId);
+    //     // dd($order);
 
-        return view('pizza.status', ['order' => $order]);
-    }
+    //     return view('pizza.status', ['order' => $order]);
+    // }
 }
