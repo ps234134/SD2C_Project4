@@ -2,6 +2,11 @@
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-items-center py-8">
         <div class="pizzas-container grid grid-cols-1 md:grid-cols-2 gap-20">
+        @if(session()->has('alert'))
+                        <script>
+                            {!! session()->get('alert') !!}
+                        </script>
+                    @endif
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
                     <div class="relative flex justify-center">
@@ -10,6 +15,7 @@
                     <script>
                         let basePrices = {};
                     </script>
+                 
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
