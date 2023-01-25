@@ -1,3 +1,18 @@
+/* Order popup*/
+
+function showOrders(){
+    var container = document.querySelector('.bestellingen-container');
+    var backdrop = document.querySelector('.backdrop');
+    container.classList.toggle('show');
+    backdrop.classList.toggle('show');
+}
+document.querySelector('.shopping-cart-icon').addEventListener('click', showOrders);
+document.querySelector('.backdrop').addEventListener('click', showOrders);
+
+
+
+/*update price van pizza door size*/
+
 function updatePrice(pizzaId, sizeMultiplier) {
     let basePrice = basePrices[pizzaId];
     let updatedPrice = basePrice * sizeMultiplier;
@@ -6,6 +21,8 @@ function updatePrice(pizzaId, sizeMultiplier) {
     priceElement.setAttribute("data-price", updatedPrice);
 }
 
+/*
+*calculate the total when add order to order-list */
 function calculateTotal() {
     let orderList = document.getElementsByClassName("orders-list")[0];
     let orderItems = orderList.getElementsByClassName("order-item");
@@ -62,6 +79,7 @@ function addToOrder(pizzaId) {
         "</div>" +
         '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
         '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
+        '<input type="hidden" id="price" name="order[' + orderPizzaId + '][price]" value="' + price + '" />' +
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
@@ -138,5 +156,5 @@ function removeOrder() {
     // Reset the total price
     document.getElementById("total").innerHTML = "€0.00";
     // Reset the cart quantity
-    updateCartQuantity(-1);
+    updateCartQuantity(-1 * document.getElementById("cart-quantity").innerHTML);
 }

@@ -15,9 +15,6 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pizza_id');
-            $table->string('size');
-            $table->decimal('total_price');
             $table->string('status');
             $table->timestamps();
         });

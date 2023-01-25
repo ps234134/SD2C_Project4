@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// require __DIR__.'/auth.php';
 
 
 Route::get('/dashboard', function () {
@@ -30,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+require __DIR__.'/auth.php';
 
 Route::get('/menu', [PizzaController::class, 'index']);
 Route::get('/home', function() {
@@ -42,9 +41,12 @@ Route::get('/contact', function() {
 
 
 Route::resource('pizza', PizzaController::class);
+Route::resource('order', OrderController::class);
 
 // this route is a intermidiate step for the store method and doesn't have an acutal page!
 Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
 
 Route::get('/status', [OrderController::class, 'status'])->name('order.show');
+
+
 
