@@ -1,13 +1,3 @@
-const { each } = require("lodash");
-
-//secures total price
-function hashData() {
-    let hashedTotalServer = CryptoJS.SHA256(total);
-    let hashedTotalClient = document.getElementById("total");
-}
-
-
-
 function updatePrice(pizzaId, sizeMultiplier) {
     let basePrice = basePrices[pizzaId];
     let updatedPrice = basePrice * sizeMultiplier;
@@ -33,18 +23,17 @@ function calculateTotal() {
 }
 
 function addToOrder(pizzaId) {
-    // Get the pizza image src
+
     let image = document.querySelector("#pizza-img-" + pizzaId).src;
-    // Get the corresponding size string from the option value
+
     let sizeString = document.getElementById("size-" + pizzaId).options[
         document.getElementById("size-" + pizzaId).selectedIndex
     ].text;
-    // Get the pizza name from the h2 element
+
     let pizzaName = document.querySelector("#pizza-" + pizzaId).innerHTML;
-    // Get the updated price from the p element
+
     let price = document.getElementById("price-" + pizzaId).innerHTML;
 
-    // count how many unique pizza orders there are in the order
     let orderPizzaId = document.querySelector(".orders-list").childElementCount;
     // Create a new div to display the pizza in the order list
     let pizzaDiv = document.createElement("div");
@@ -77,7 +66,7 @@ function addToOrder(pizzaId) {
         price +
         "</p>" +
         "</div>";
-    // Append the div to the orders-list element
+
     document.querySelector(".orders-list").appendChild(pizzaDiv);
     // Update the total price
     calculateTotal();
