@@ -50,3 +50,4 @@ Route::get('/status', [OrderController::class, 'status'])->name('order.show');
 
 
 require __DIR__.'/auth.php';
+

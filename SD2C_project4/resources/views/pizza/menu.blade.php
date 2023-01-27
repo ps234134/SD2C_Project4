@@ -15,6 +15,7 @@
                     <script>
                         let basePrices = {};
                     </script>
+
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>

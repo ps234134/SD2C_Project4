@@ -1,12 +1,3 @@
-const { each } = require("lodash");
-
-//secures total price
-function hashData() {
-    let hashedTotalServer = CryptoJS.SHA256(total);
-    let hashedTotalClient = document.getElementById("total");
-}
-
-
 
 /* Order popup*/
 

@@ -13,10 +13,6 @@ class Order extends Model
     public function pizzas()
     {
         return $this->belongsToMany(Pizza::class)->withPivot('quantity', 'size');
-    }
 
-    public function orderPizzas()
-    {
-        return $this->hasMany(OrderPizza::class);
     }
 }

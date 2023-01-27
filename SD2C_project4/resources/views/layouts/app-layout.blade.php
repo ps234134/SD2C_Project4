@@ -24,7 +24,7 @@
 <body>
 
     <div class="d-flex flex-column min-vh-100">
-        <div>
+        <div> 
             <!-- Your header content here -->
             <header>
                 @include('layouts.nav')
