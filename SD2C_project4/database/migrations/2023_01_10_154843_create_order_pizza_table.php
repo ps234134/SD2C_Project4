@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pizza_id');
             $table->foreignId('order_id');
+            $table->string('size');
             $table->integer('quantity')->default(1);
         });
     }

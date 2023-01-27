@@ -12,9 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="./assets/js/pizzaOrder.js"></script>
-    <script type="text/javascript" src="./assets/js/orders.js"></script>
     <script type="text/javascript" src="./assets/js/pizzaOrderV2.js"></script>
+
 
 
     @vite('resources/css/app.css')
@@ -25,7 +24,7 @@
 <body>
 
     <div class="d-flex flex-column min-vh-100">
-        <div>
+        <div> 
             <!-- Your header content here -->
             <header>
                 @include('layouts.nav')

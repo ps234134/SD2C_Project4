@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,8 +38,15 @@ Route::get('/home', function() {
 Route::get('/contact', function() {
     return view('pizza.contact');
 });
-Route::get('/status', function() {
-    return view('pizza.status');
-});
+
 
 Route::resource('pizza', PizzaController::class);
+Route::resource('order', OrderController::class);
+
+// this route is a intermidiate step for the store method and doesn't have an acutal page!
+Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
+
+Route::get('/status', [OrderController::class, 'status'])->name('order.show');
+
+
+

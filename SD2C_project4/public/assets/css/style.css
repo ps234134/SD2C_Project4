@@ -118,7 +118,7 @@ nav{
   /* status content */
 
   .info-container{
-    height: 100vh;
+    height: fit-content;
     width: 800px;
 }
 
@@ -293,3 +293,19 @@ nav{
   .order-list{
     padding-left: 1.5rem;
   }
+
+
+  .orders{
+    width: 500px;
+  }
+
+  .orders img{
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 15px 50px;
+}
+
+.status-items p{
+    line-height: 40px;
+}

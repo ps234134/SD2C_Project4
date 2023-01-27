@@ -2,14 +2,20 @@
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-items-center py-8">
         <div class="pizzas-container grid grid-cols-1 md:grid-cols-2 gap-20">
+        @if(session()->has('alert'))
+                        <script>
+                            {!! session()->get('alert') !!}
+                        </script>
+                    @endif
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
-                    <div class="relative flex justify-center">
-                        <img class="rounded" id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
+                    <div class="relative flex justify-center ">
+                        <img class="rounded-lg shadow-md" id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
                     <script>
                         let basePrices = {};
                     </script>
+
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
@@ -49,12 +55,12 @@
         <div class="bestellingen-container">
             <div class="bestellingen-card rounded-lg shadow-md bg-gray-100" style="position: sticky; top: 0;">
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
-                <form method="GET" action="{{'/status'}}" >
+
+
+                <form action="{{ route('pizza.order') }}" method="POST">
                     @csrf
-                    {{-- <input type="hidden" name="pizza_name" value="{{ $pizza->pizza_name }}">
-                    <input type="hidden" name="price">
-                    <input type="hidden" name="size">
-                    <input type="hidden" name="total"> --}}
+                    <input type="hidden" name="status" value="Word bereid">
+
                     <div class="orders-list flex-col items-start px-4 overflow-y-auto" style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
@@ -75,6 +81,7 @@
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
         <div class="backdrop"></div>
