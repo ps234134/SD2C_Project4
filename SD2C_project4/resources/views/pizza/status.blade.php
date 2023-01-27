@@ -51,7 +51,7 @@
                         @foreach ($order->pizzas as $pizza)
                             <div class="orders flex justify-between my-6 rounded-lg shadow-md bg-gray-100 p-4 ">
                                 <div>
-                                    <p>{{ $pizza->pizza_name }}</p>
+                                    <p class="font-medium">{{ $pizza->pizza_name }}</p>
                                     <p>Grootte: {{ $pizza->pivot->size }}</p>
                                     <p>Hoeveelheid: {{ $pizza->pivot->quantity }}</p>
                                     <p>Prijs: €{{ number_format($pizza->calculated_price, 2) }}</p>

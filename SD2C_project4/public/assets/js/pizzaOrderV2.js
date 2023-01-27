@@ -158,3 +158,9 @@ function removeOrder() {
     // Reset the cart quantity
     updateCartQuantity(-1 * document.getElementById("cart-quantity").innerHTML);
 }
+
+
+
+
+
+
