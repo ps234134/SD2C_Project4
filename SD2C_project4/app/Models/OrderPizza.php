@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pizza extends Model
+class OrderPizza extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function orders()
+    public function order()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function orderPizzas()
+    public function pizza()
     {
-        return $this->hasMany(OrderPizza::class);
+        return $this->belongsTo(Pizza::class);
     }
+
+    
 }
+
+
+

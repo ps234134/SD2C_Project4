@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
 
 Route::get('/menu', [PizzaController::class, 'index']);
 Route::get('/home', function() {
@@ -49,4 +49,5 @@ Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
 Route::get('/status', [OrderController::class, 'status'])->name('order.show');
 
 
+require __DIR__.'/auth.php';
 
