@@ -84,11 +84,7 @@ class PizzaController extends Controller
         session(['price' => $price]);
         session(['size' => $size]);
         session(['total_price' => $total_price]);
-<<<<<<< HEAD
-        return view('/status', compact('pizza_name', 'price', 'size', 'total_price'));
-=======
         return view('pizza.status', compact('pizza_name', 'price', 'size', 'total_price'));
->>>>>>> origin/test
 
     }
     /**

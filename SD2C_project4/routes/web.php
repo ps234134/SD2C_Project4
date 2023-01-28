@@ -50,20 +50,6 @@ Route::get('/contact', function() {
 
 
 Route::resource('pizza', PizzaController::class);
-<<<<<<< HEAD
-
-// Route::post('/status', function(Request $request) {
-
-
-// });
-
-Route::post('/status', [OrderController::class, 'postStatus']);
-Route::resource('orders', OrderController::class);
-
-// Route::post('/status', [OrderController::class, 'index']);
-Route::post('/status', [OrderController::class, 'store'])->name('pizza.status');
-
-=======
 // Route::get('/status', function() {
 //     return view('pizza.status');
 // });
@@ -77,4 +63,3 @@ Route::post('/status', function() {
 //     return view('pizza.status', ['id' => $request->id]);
 // });
 // Route::post('/status', [pizzaController::class, 'show']);
->>>>>>> origin/test
