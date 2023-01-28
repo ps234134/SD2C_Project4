@@ -7,8 +7,6 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Pizza;
 use App\OrderPizza;
-use GuzzleHttp\Psr7\Request;
-
 use Illuminate\Http\Request;
 class OrderController extends Controller
 {

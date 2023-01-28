@@ -89,7 +89,7 @@ class PizzaController extends Controller
     }
     /**
      * Update the specified resource in storage.
-     *
+     *  
      * @param  \App\Http\Requests\UpdatePizzaRequest  $request
      * @param  \App\Models\Pizza  $pizza
      * @return \Illuminate\Http\Response
