@@ -2,14 +2,20 @@
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-items-center py-8">
         <div class="pizzas-container grid grid-cols-1 md:grid-cols-2 gap-20">
+        @if(session()->has('alert'))
+                        <script>
+                            {!! session()->get('alert') !!}
+                        </script>
+                    @endif
             @foreach ($pizzas as $pizza)
                 <div class="pizza-card rounded-lg shadow-md bg-white">
-                    <div class="relative flex justify-center">
-                        <img id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
+                    <div class="relative flex justify-center ">
+                        <img class="rounded-lg shadow-md" id="pizza-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
                     </div>
                     <script>
                         let basePrices = {};
                     </script>
+
                     <div class="px-2 py-4">
                         <div class="flex justify-between text-justify">
                             <h2 class="font-medium" id="pizza-{{ $pizza->id }}">{{ $pizza->pizza_name }}</h2>
@@ -51,27 +57,15 @@
                 <h2 class="text-lg font-medium p-4 border-b-2">Bestelling</h2>
 
 
-<<<<<<< HEAD
-                <form method="POST" action="{{ route('pizza.status') }}">
-=======
-                <form method="POST" action="{{'/status'}}" >
->>>>>>> origin/test
+                <form action="{{ route('pizza.order') }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Word bereid">
 
-                    <div class="orders-list flex-col items-start px-4 " style="height: calc(100vh - 200px);">
+                    <div class="orders-list flex-col items-start px-4 overflow-y-auto" style="height: calc(100vh - 200px);">
                         <!-- Orders will be displayed here -->
                     </div>
                     <div class="p-4 flex-col bg-white">
                         <div class="my-2 font-medium">
-<<<<<<< HEAD
-                            <p>Totaal <span id="total"></span></p>
-                        </div>
-                        <div class="mt-4 flex justify-center">
-                            <button type="submit"
-                                class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
-                                style="width: 300px">Plaats
-=======
                             <p>Totaal:  <span id="total">€0.00</span></p>
                         </div>
                         <div class="mt-4 flex justify-between">
@@ -83,7 +77,6 @@
                                 <button type="button" onclick="removeOrder()"
                                 class="px-4 py-1 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none"
                                 style="width: 150px">Annuleer
->>>>>>> origin/test
                                 bestelling</button>
                         </div>
                     </div>

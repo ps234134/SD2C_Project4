@@ -1,12 +1,17 @@
-const { each } = require("lodash");
+/* Order popup*/
 
-//secures total price
-function hashData() {
-    let hashedTotalServer = CryptoJS.SHA256(total);
-    let hashedTotalClient = document.getElementById("total");
+function showOrders() {
+    var container = document.querySelector('.bestellingen-container');
+    var backdrop = document.querySelector('.backdrop');
+    container.classList.toggle('show');
+    backdrop.classList.toggle('show');
 }
+document.querySelector('.shopping-cart-icon').addEventListener('click', showOrders);
+document.querySelector('.backdrop').addEventListener('click', showOrders);
 
 
+
+/*update price van pizza door size*/
 
 function updatePrice(pizzaId, sizeMultiplier) {
     let basePrice = basePrices[pizzaId];
@@ -16,6 +21,8 @@ function updatePrice(pizzaId, sizeMultiplier) {
     priceElement.setAttribute("data-price", updatedPrice);
 }
 
+/*
+ *calculate the total when add order to order-list */
 function calculateTotal() {
     let orderList = document.getElementsByClassName("orders-list")[0];
     let orderItems = orderList.getElementsByClassName("order-item");
@@ -33,18 +40,17 @@ function calculateTotal() {
 }
 
 function addToOrder(pizzaId) {
-    // Get the pizza image src
+
     let image = document.querySelector("#pizza-img-" + pizzaId).src;
-    // Get the corresponding size string from the option value
+
     let sizeString = document.getElementById("size-" + pizzaId).options[
         document.getElementById("size-" + pizzaId).selectedIndex
     ].text;
-    // Get the pizza name from the h2 element
+
     let pizzaName = document.querySelector("#pizza-" + pizzaId).innerHTML;
-    // Get the updated price from the p element
+
     let price = document.getElementById("price-" + pizzaId).innerHTML;
 
-    // count how many unique pizza orders there are in the order
     let orderPizzaId = document.querySelector(".orders-list").childElementCount;
     // Create a new div to display the pizza in the order list
     let pizzaDiv = document.createElement("div");
@@ -68,44 +74,26 @@ function addToOrder(pizzaId) {
         '<div class="flex justify-between border-b-2 py-4">' +
         '<div class="flex bg-white p-2 rounded-md shadow-md">' +
         '<button type="button" onclick="decreaseOrder(this)" class="font-semibold text-lg">-</button>' +
-<<<<<<< HEAD
-        '<input name="orderRows[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" />' +
-        '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
-        "</div>" +
-        '<input type="hidden" id="pizzaId" name="orderRows[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
-        '<input type="hidden" id="size" name="orderRows[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
-=======
+
         '<input name="order[' + orderPizzaId + '][quantity]" class="order-quantity font-semibold px-6" value="1" style="width: 60px"/>' +
         '<button type="button" onclick="increaseOrder(this)" class="font-semibold text-lg">+</button>' +
         "</div>" +
         '<input type="hidden" id="pizzaId" name="order[' + orderPizzaId + '][pizzaId]" value="' + pizzaId + '" />' +
         '<input type="hidden" id="size" name="order[' + orderPizzaId + '][size]" value="' + sizeString + '" />' +
->>>>>>> origin/test
+
+        '<input type="hidden" id="price" name="order[' + orderPizzaId + '][price]" value="' + price + '" />' +
+
         '<p class="order-price font-semibold">' +
         price +
         "</p>" +
         "</div>";
-    // Append the div to the orders-list element
+
     document.querySelector(".orders-list").appendChild(pizzaDiv);
     // Update the total price
     calculateTotal();
     //Add the quantity of the order to the cart
     updateCartQuantity(1);
 
-<<<<<<< HEAD
-=======
-    let pizza_name = document.querySelector("#pizza_name").value;
-    let price2 = document.querySelector("#price").value;
-    let size = document.querySelector("#size").value;
-    let total_price = document.querySelector("#total").value;
-
-    document.querySelector("input[name='pizza_name']").value = pizza_name;
-    document.querySelector("input[name='price']").value = price2;
-    document.querySelector("input[name='size']").value = size;
-    document.querySelector("input[name='total_price']").value = total_price;
-
-
->>>>>>> origin/test
 }
 
 // Function to update the quantity of items in the cart
@@ -154,16 +142,6 @@ function reassignPizzaOrderIDs() {
     let orderListElement = document.querySelector(".orders-list");
     for (let i = 0; i < orderListElement.childElementCount; i++) {
         let orderPizzaElement = orderListElement.children[i];
-<<<<<<< HEAD
-        document.querySelector("#pizzaId").name = 'orderRows[' + i + '][pizzaId]';
-        document.querySelector(".order-quantity").name = 'orderRows[' + i + '][quantity]';
-        document.querySelector("#size").name = 'orderRows[' + i + '][size]';
-    }
-
-
-
-}
-=======
         document.querySelector("#pizzaId").name = 'order[' + i + '][pizzaId]';
         document.querySelector(".order-quantity").name = 'order[' + i + '][quantity]';
         document.querySelector("#size").name = 'order[' + i + '][size]';
@@ -176,11 +154,11 @@ function removeOrder() {
     let orderItems = document.querySelectorAll(".order-item");
     // Iterate through each order item and remove it from the orders-list element
     orderItems.forEach(function(orderItem) {
-      orderItem.remove();
+        orderItem.remove();
     });
     // Reset the total price
     document.getElementById("total").innerHTML = "€0.00";
     // Reset the cart quantity
-    updateCartQuantity(-1);
-  }
->>>>>>> origin/test
+
+    updateCartQuantity(-1 * document.getElementById("cart-quantity").innerHTML);
+}

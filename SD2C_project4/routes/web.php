@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Order;
 use App\Models\OrderPizza;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 =======
 use Illuminate\Http\Request;
@@ -14,6 +15,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
+=======
+use Illuminate\Support\Facades\Route;
+
+>>>>>>> 0ce7272ef7e43b8735fa9f430253e3794cabe934
 
 
 /*
@@ -50,16 +55,29 @@ Route::get('/contact', function() {
 
 
 Route::resource('pizza', PizzaController::class);
+<<<<<<< HEAD
 // Route::get('/status', function() {
 //     return view('pizza.status');
 // });
 Route::post('/status', function() {
     return view('pizza.status');
 });
+=======
+Route::resource('order', OrderController::class);
 
-// Route::post('/status', [PizzaController::class, 'status']);
+// this route is a intermidiate step for the store method and doesn't have an acutal page!
+Route::post('/order', [OrderController::class, 'store'])->name('pizza.order');
 
+Route::get('/status', [OrderController::class, 'status'])->name('order.show');
+
+>>>>>>> 0ce7272ef7e43b8735fa9f430253e3794cabe934
+
+require __DIR__.'/auth.php';
+
+<<<<<<< HEAD
 // Route::post('/status', function(Request $request) {
 //     return view('pizza.status', ['id' => $request->id]);
 // });
 // Route::post('/status', [pizzaController::class, 'show']);
+=======
+>>>>>>> 0ce7272ef7e43b8735fa9f430253e3794cabe934
