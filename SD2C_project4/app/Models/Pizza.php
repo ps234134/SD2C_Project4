@@ -19,4 +19,15 @@ class Pizza extends Model
     {
         return $this->hasMany(OrderPizza::class);
     }
+
+    public function PizzaPrice($size) {
+        if($size == 'Small'){
+            return $this->base_price * 0.8;
+        } else
+        if($size == 'Medium'){
+            return $this->base_price * 1;
+        } else {
+            return $this->base_price * 1.2;
+        }
+    }
 }

@@ -13,41 +13,36 @@ class OrderTest extends TestCase
 
     public function testCalculatePriceSmall()
     {
-        $pizza = new Pizza();
-        $pizza->base_price = 10;
-        $pizza->size = 'Small';
-        if($pizza->size == 'Small'){
-            $pizza->calculated_price = $pizza->base_price * 0.8;
-        }
-        $this->getStatus($pizza);
+        $pizza = new Pizza(
+            [
+                'base_price' => 10,
+                'size' => 'Small',]
+        );
+        $calculated_price = $pizza->PizzaPrice('Small');
 
-        $this->assertEquals(8, $pizza->calculated_price);
+        $this->assertEquals(8, $calculated_price, 'Pizza price is not correct');
     }
 
     public function testCalculatePriceMedium()
     {
-        $pizza = new Pizza();
-        $pizza->base_price = 10;
-        $pizza->size = 'Medium';
-        if($pizza->size == 'Medium'){
-            $pizza->calculated_price = $pizza->base_price * 1;
-        }
-        $this->getStatus($pizza);
-
-        $this->assertEquals(10, $pizza->calculated_price);
+        $pizza = new Pizza(
+            [
+                'base_price' => 10,
+                'size' => 'Medium',]
+        );
+        $calculated_price = $pizza->PizzaPrice('Medium');
+        $this->assertEquals(10, $calculated_price, 'Pizza price is not correct');
     }
 
     public function testCalculatePriceLarge()
     {
-        $pizza = new Pizza();
-        $pizza->base_price = 10;
-        $pizza->size = 'Large';
-        if($pizza->size == 'Large'){
-            $pizza->calculated_price = $pizza->base_price * 1.2;
-        }
-        $this->getStatus($pizza);
-
-        $this->assertEquals(12, $pizza->calculated_price);
+        $pizza = new Pizza(
+            [
+                'base_price' => 10,
+                'size' => 'Large',]
+        );
+        $calculated_price = $pizza->PizzaPrice('Large');
+        $this->assertEquals(12, $calculated_price, 'Pizza price is not correct');
     }
 
 
