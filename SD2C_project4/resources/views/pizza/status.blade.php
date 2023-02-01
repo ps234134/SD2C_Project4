@@ -54,7 +54,7 @@
                                     <p class="font-medium">{{ $pizza->pizza_name }}</p>
                                     <p>Grootte: {{ $pizza->pivot->size }}</p>
                                     <p>Hoeveelheid: {{ $pizza->pivot->quantity }}</p>
-                                    <p>Prijs: €{{ number_format($pizza->calculated_price, 2) }}</p>
+                                    <p>Prijs: €{{ number_format($pizza->price, 2) }}</p>
                                 </div>
                                 <div>
                                     <img id="status-img-{{ $pizza->id }}" src="{{ asset($pizza->img) }}" alt="Pizza">
@@ -62,7 +62,7 @@
                             </div>
 
                             @php
-                                $total += $pizza->calculated_price * $pizza->pivot->quantity;
+                                $total += $pizza->price * $pizza->pivot->quantity;
                             @endphp
                         @endforeach
 

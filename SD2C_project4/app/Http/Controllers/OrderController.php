@@ -24,6 +24,7 @@ class OrderController extends Controller
     // public function store(StoreOrderRequest $request)
     public function store(Request $request)
     {
+
         // * will validate everything from the order array, with the given keys after *.
         $request->validate([
 
@@ -31,13 +32,6 @@ class OrderController extends Controller
             'order.*.pizzaId' => 'required|exists:pizzas,id',
             'order.*.size' => 'required|in:Small,Medium,Large',
         ]);
-
-
-        // Create a new order and save it to the database
-        $order = new Order([
-            'status' => $request->status,
-        ]);
-        $order->save();
 
 
         try {
@@ -50,16 +44,19 @@ class OrderController extends Controller
 
             // reads values from order array and saves them as seperate variables to make a db entry in order_pizza
             foreach ($request->order as $orderItem) {
+
                 $quantity = $orderItem['quantity'];
                 $pizzaId = $orderItem['pizzaId'];
                 $size = $orderItem['size'];
 
                 $pizza = Pizza::find($pizzaId);
+
                 $order->pizzas()->attach($pizza, ['quantity' => $quantity, 'size' => $size,]);
             }
 
             // adds orderId with the value of the id from $order
             return redirect()->route('order.show', ['orderId' => $order->id]);
+
         } catch (\Throwable $th) {
 
             return redirect()->back()->with('error', 'Error message')->with('alert', 'alert("Plaats uw order")');
@@ -68,22 +65,9 @@ class OrderController extends Controller
 
     public function status(Request $request)
     {
-
         $order = Order::find($request->orderId);
         foreach ($order->pizzas as $pizza) {
-            switch ($pizza->pivot->size) {
-                case 'Small':
-                    $pizza->calculated_price = $pizza->base_price * 0.8;
-                    break;
-                case 'Medium':
-                    $pizza->calculated_price = $pizza->base_price;
-                    break;
-                case 'Large':
-                    $pizza->calculated_price = $pizza->base_price * 1.2;
-                    break;
-                default:
-                    $pizza->calculated_price = $pizza->base_price;
-            }
+            $pizza->price = $pizza->PizzaPrice($pizza->pivot->size);
         }
         return view('pizza.status', ['order' => $order]);
     }
