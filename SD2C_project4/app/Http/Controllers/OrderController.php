@@ -67,19 +67,7 @@ class OrderController extends Controller
     {
         $order = Order::find($request->orderId);
         foreach ($order->pizzas as $pizza) {
-            switch ($pizza->pivot->size) {
-                case 'Small':
-                    $pizza->calculated_price = $pizza->base_price * 0.8;
-                    break;
-                case 'Medium':
-                    $pizza->calculated_price = $pizza->base_price;
-                    break;
-                case 'Large':
-                    $pizza->calculated_price = $pizza->base_price * 1.2;
-                    break;
-                default:
-                    $pizza->calculated_price = $pizza->base_price;
-            }
+            $pizza->price = $pizza->PizzaPrice($pizza->pivot->size);
         }
         return view('pizza.status', ['order' => $order]);
     }
