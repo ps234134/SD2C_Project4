@@ -15,11 +15,6 @@ class Pizza extends Model
         return $this->belongsToMany(Order::class);
     }
 
-    public function orderPizzas()
-    {
-        return $this->hasMany(OrderPizza::class);
-    }
-
     public function PizzaPrice($size) {
         if($size == 'Small'){
             return $this->base_price * 0.8;

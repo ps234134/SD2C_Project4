@@ -34,21 +34,21 @@ class PizzaSeeder extends Seeder
             'pizza_name' => 'Pizza Salami',
             'base_price' => '11.00',
             'img'=> 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqPZ0aVKOJaqGWa9YB0HesAa8nm_5r7efXEw&usqp=CAU'
-         
+
         ]);
 
         DB::table('pizzas')->insert([
             'pizza_name' => 'Pizza Tonno',
             'base_price' => '15.00',
             'img'=> 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMM3xhavaA0bC5tk4YzxzFr1ZxQD5ycEebog&usqp=CAU'
-         
+
         ]);
 
         DB::table('pizzas')->insert([
             'pizza_name' => 'Pizza Hot&Spicy',
             'base_price' => '14.00',
             'img'=> 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi5Y7DtZSG4EjS2fTMu2BXtwhqC1Hv0v3ISkcPf6dXKT8JjNn63xtNl9tP06hNCSgykCI&usqp=CAU'
-         
+
         ]);
 
         DB::table('pizzas')->insert([
